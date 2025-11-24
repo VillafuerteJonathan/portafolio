@@ -33,7 +33,7 @@
 	<ul class="hidden md:flex gap-12 text-[15px] font-medium">
 		{#each [
 			['Inicio', '/'],
-			['Sobre Mí', '/sobre-mi'],
+			['Sobre Mí', '#sobre-mi'],
 			['Proyectos', '/proyectos'],
 			['Certificados', '/certificados'],
 			['Estudios', '/estudios'],
@@ -53,24 +53,7 @@
 		{/each}
 	</ul>
 
-	<!-- BOTÓN MODO OSCURO -->
-	<button
-		class="text-2xl text-gray-300 hover:text-purple-400 transition transform hover:scale-125"
-	>
-		🌙
-	</button>
-
-	<!-- BOTÓN HAMBURGUESA MÓVIL -->
-	<button
-		class="md:hidden text-3xl text-gray-300 hover:text-white transition"
-		on:click={() => (isOpen = !isOpen)}
-	>
-		{#if isOpen}
-			✕
-		{:else}
-			☰
-		{/if}
-	</button>
+	
 </nav>
 
 <!-- MENÚ MÓVIL -->

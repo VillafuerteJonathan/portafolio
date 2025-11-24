@@ -1,358 +1,372 @@
 <script>
-	import TechModal from "$lib/components/TechModal.svelte";
-	import { TECH } from "$lib/data/tech.js";
-	import { onMount } from 'svelte';
+    import TechModal from "$lib/components/TechModal.svelte";
+    import { TECH } from "$lib/data/tech.js";
+    import { onMount, onDestroy } from "svelte";
 
-	let modalOpen = false;
-	let selectedCategory = null;
-	let mousePosition = { x: 0, y: 0 };
-	let cardRefs = [];
-	let titleRef;
+    let modalOpen = false;
+    let selectedCategory = null;
 
-	// Efectos de partículas
-	let particles = [];
+    let mousePosition = { x: 0, y: 0 };
+    let titleRef;
 
-	onMount(() => {
-		// Inicializar partículas
-		initializeParticles();
-		
-		// Animación de escritura para el título
-		animateTitle();
-	});
+    // Partículas de fondo
+    let particles = [];
+    let particlesInterval;
 
-	function initializeParticles() {
-		for (let i = 0; i < 20; i++) {
-			particles.push({
-				id: i,
-				x: Math.random() * 100,
-				y: Math.random() * 100,
-				size: Math.random() * 2 + 1,
-				speedX: (Math.random() - 0.5) * 0.5,
-				speedY: (Math.random() - 0.5) * 0.5,
-				opacity: Math.random() * 0.3 + 0.1
-			});
-		}
-	}
+    onMount(() => {
+        initParticles();
+        animateTitle();
 
-	function animateTitle() {
-		if (titleRef) {
-			const letters = titleRef.querySelectorAll('.letter');
-			letters.forEach((letter, index) => {
-				letter.style.animationDelay = `${index * 0.1}s`;
-			});
-		}
-	}
+        particlesInterval = setInterval(updateParticles, 90);
+    });
 
-	function openModal(name) {
-		selectedCategory = name;
-		modalOpen = true;
-		
-		// Efecto de vibración al abrir modal
-		cardRefs.forEach(card => {
-			if (card) {
-				card.style.transform = 'scale(0.95)';
-				setTimeout(() => {
-					card.style.transform = 'scale(1)';
-				}, 150);
-			}
-		});
-	}
+    onDestroy(() => {
+        if (particlesInterval) clearInterval(particlesInterval);
+    });
 
-	function closeModal() {
-		modalOpen = false;
-	}
+    function initParticles() {
+        const arr = [];
+        for (let i = 0; i < 100; i++) {
+            arr.push({
+                id: i,
+                x: Math.random() * 100,
+                y: Math.random() * 100,
+                size: Math.random() * 3 + 1,
+                speedX: (Math.random() - 0.5) * 0.4,
+                speedY: (Math.random() - 0.5) * 0.4,
+                opacity: Math.random() * 0.3 + 0.1
+            });
+        }
+        particles = arr;
+    }
 
-	function handleMouseMove(event) {
-		mousePosition.x = (event.clientX / window.innerWidth - 0.5) * 20;
-		mousePosition.y = (event.clientY / window.innerHeight - 0.5) * 20;
-	}
+    function animateTitle() {
+        if (!titleRef) return;
+        const letters = titleRef.querySelectorAll(".letter");
+        letters.forEach((l, i) => {
+            l.style.animationDelay = `${i * 0.08}s`;
+        });
+    }
 
-	function handleMouseEnter(card, index) {
-		if (card) {
-			card.style.transform = `translateY(-10px) rotateX(${mousePosition.y * 0.5}deg) rotateY(${mousePosition.x * 0.5}deg)`;
-			card.style.boxShadow = `0 25px 50px -12px rgba(147, 51, 234, 0.5)`;
-		}
-	}
+    function openModal(key) {
+        selectedCategory = key;
+        modalOpen = true;
+    }
 
-	function handleMouseLeave(card, index) {
-		if (card) {
-			card.style.transform = 'translateY(0) rotateX(0) rotateY(0)';
-			card.style.boxShadow = '0 10px 25px -3px rgba(0, 0, 0, 0.3)';
-		}
-	}
+    function closeModal() {
+        modalOpen = false;
+    }
 
-	function updateParticles() {
-		particles = particles.map(particle => ({
-			...particle,
-			x: (particle.x + particle.speedX) % 100,
-			y: (particle.y + particle.speedY) % 100
-		}));
-	}
+    function handleMouseMove(e) {
+        mousePosition = {
+            x: (e.clientX / window.innerWidth - 0.5) * 15,
+            y: (e.clientY / window.innerHeight - 0.5) * 15
+        };
+    }
 
-	setInterval(updateParticles, 100);
+    function updateParticles() {
+        particles = particles.map((p) => ({
+            ...p,
+            x: (p.x + p.speedX + 100) % 100,
+            y: (p.y + p.speedY + 100) % 100
+        }));
+    }
+
+    const skillCategories = [
+        { key: "frontend", name: "Frontend", emoji: "🎨", accentClass: "text-pink-400" },
+        { key: "backend", name: "Backend", emoji: "🛠️", accentClass: "text-green-400" },
+        { key: "database", name: "Bases de Datos", emoji: "🗄️", accentClass: "text-yellow-400" },
+        { key: "devops", name: "DevOps & Tools", emoji: "⚙️", accentClass: "text-blue-400" },
+        { key: "tools", name: "Software & Analítica", emoji: "🧠", accentClass: "text-purple-400" }
+    ];
 </script>
 
 <svelte:window on:mousemove={handleMouseMove} />
 
-<section class="pt-32 pb-20 px-6 md:px-20 text-white relative overflow-hidden">
+<section id="sobre-mi"  class="pt-32 pb-24 px-6 md:px-20 text-white relative overflow-hidden">
 
-	<!-- Fondo de partículas -->
-	<div class="absolute inset-0 pointer-events-none">
-		{#each particles as particle}
-			<div 
-				class="absolute rounded-full bg-purple-400"
-				style="
-					left: {particle.x}%;
-					top: {particle.y}%;
-					width: {particle.size}px;
-					height: {particle.size}px;
-					opacity: {particle.opacity};
-				"
-			/>
-		{/each}
-	</div>
+    <!-- ================= PARTICULAS ================= -->
+    <div class="absolute inset-0 pointer-events-none">
+        {#each particles as p}
+            <div
+                class="absolute rounded-full bg-purple-400"
+                style="
+                    left: {p.x}%;
+                    top: {p.y}%;
+                    width: {p.size}px;
+                    height: {p.size}px;
+                    opacity: {p.opacity};
+                "
+            />
+        {/each}
+    </div>
 
-	<!-- ====================== TÍTULO PRINCIPAL ====================== -->
-	<div class="text-center mb-14 relative z-10">
-		<h1 
-			bind:this={titleRef}
-			class="text-5xl font-extrabold bg-gradient-to-r from-purple-400 via-pink-400 to-purple-600 text-transparent bg-clip-text mb-4"
-		>
-			{#each "Acerca de Mí".split('') as letter, i}
-				<span class="letter inline-block animate-typing">{letter}</span>
-			{/each}
-		</h1>
+<!-- ================= TITULO ================= -->
+<div class="text-center mb-16 relative z-10">
 
-		<p class="text-gray-300 mt-4 text-lg max-w-2xl mx-auto animate-fade-in-up">
-			Descubre mi pasión por el desarrollo, mis habilidades técnicas y mi trayectoria dentro del mundo de la tecnología.
-		</p>
+    <h1
+        bind:this={titleRef}
+        class="text-5xl font-extrabold mb-5 text-white"
+    >
+        {#each "Acerca de Mí".split("") as letter, i}
+            <span class="letter inline-block animate-typing">
+                {letter === " " ? '\u00A0' : letter}
+            </span>
+        {/each}
+    </h1>
 
-		<!-- Efecto de brillo animado -->
-		<div class="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur opacity-30 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse-slow"></div>
-	</div>
+    <p class="text-gray-300 text-lg max-w-2xl mx-auto animate-fade-in-up">
+        Te cuento quién soy, cómo trabajo y qué tecnologías domino como desarrollador Full Stack.
+    </p>
+</div>
 
-	<!-- ====================== GRID PRINCIPAL ====================== -->
-	<div class="grid grid-cols-1 md:grid-cols-2 gap-10 relative z-10">
+    <!-- ================= GRID SOBRE MÍ / HABILIDADES ================= -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 relative z-10">
 
-		<!-- ---------------- TARJETA CONÓCEME ---------------- -->
-		<div 
-			class="bg-[#141c2f] rounded-2xl p-8 border border-white/5 shadow-xl relative group cursor-pointer transform-style-3d transition-all duration-500 hover:scale-105"
-			style="transform: perspective(1000px) rotateX(${mousePosition.y * 0.1}deg) rotateY(${mousePosition.x * 0.1}deg)"
-			on:mouseenter={(e) => handleMouseEnter(e.currentTarget)}
-			on:mouseleave={(e) => handleMouseLeave(e.currentTarget)}
-		>
-			<!-- Efecto de borde animado -->
-			<div class="absolute -inset-0.5 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl opacity-0 group-hover:opacity-100 transition duration-500 blur group-hover:blur-sm"></div>
-			<div class="absolute inset-0 bg-[#141c2f] rounded-2xl"></div>
-			
-			<div class="relative z-10">
-				<h2 class="text-2xl font-bold mb-3 flex items-center gap-2 animate-bounce-gentle">
-					<span class="text-purple-400 text-3xl">{"</>"}</span>
-					¡Conóceme!
-				</h2>
+        <!-- ========== TARJETA: SOBRE MÍ ========== -->
+        <div
+            class="bg-[#141c2f] rounded-2xl p-8 border border-white/10 shadow-xl relative group transition-all duration-500 hover:scale-[1.03]"
+            style={`transform: translateX(${mousePosition.x * 0.2}px) translateY(${mousePosition.y * 0.2}px);`}
+        >
+            <!-- glow suave -->
+          <div class="pointer-events-none absolute -inset-0.5 rounded-2xl 
+            bg-gradient-to-r from-gray-500/20 to-purple-500/20 
+            opacity-0 group-hover:opacity-100 blur-lg transition" />
 
-				<p class="text-gray-300 leading-relaxed mb-3 transform transition-transform duration-300 group-hover:translate-x-2">
-					Soy un <span class="text-purple-400 font-semibold bg-gradient-to-r from-purple-400 to-pink-400 text-transparent bg-clip-text animate-pulse">desarrollador fullstack apasionado</span> con enfoque en la creación de experiencias web modernas.
-				</p>
+            <div class="relative z-10">
+                <h2 class="text-3xl font-bold mb-4 flex items-center gap-2">
+                    <span class="text-purple-400 text-4xl">👨‍💻</span>
+                    Sobre Mí
+                </h2>
 
-				<p class="text-gray-400 transform transition-transform duration-300 group-hover:translate-x-2">
-					Me encanta diseñar interfaces intuitivas, desarrollar APIs robustas y construir soluciones escalables con buenas prácticas de ingeniería.
-				</p>
+                <p class="text-gray-300 leading-relaxed">
+                    Soy <span class="text-purple-400 font-semibold">Jonathan Villafuerte</span>,
+                    un <b>Ingeniero de Software Full Stack</b> con actitud positiva y orientación total a soluciones.
+                </p>
 
-				<a href="#contacto"
-				   class="mt-6 inline-block bg-gradient-to-r from-purple-500 to-pink-500 px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-purple-500/50 transition-all duration-300 transform hover:scale-105 hover:skew-x-2 relative overflow-hidden group">
-					<span class="relative z-10">Contáctame →</span>
-					<div class="absolute inset-0 bg-gradient-to-r from-pink-500 to-purple-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-				</a>
-			</div>
-		</div>
+                <ul class="mt-4 text-gray-300 space-y-2 leading-relaxed">
+                    <li>🤝 Me encanta colaborar y crear espacios donde todos podamos aprender y crecer.</li>
+                    <li>💡 Siempre busco una solución, incluso cuando el camino se complica.</li>
+                    <li>⚙️ Disfruto construir sistemas rápidos, robustos y pensados para ayudar a las personas.</li>
+                    <li>🚀 La tecnología es mi pasión y siempre estoy buscando el siguiente desafío.</li>
+                    <li>😄 Soy sociable, curioso y me gusta dejar una buena impresión donde voy.</li>
+                </ul>
 
-		<!-- ---------------- TARJETA HABILIDADES ---------------- -->
-		<div 
-			class="bg-[#141c2f] rounded-2xl p-8 border border-white/5 shadow-xl relative group transform-style-3d transition-all duration-500"
-			style="transform: perspective(1000px) rotateX(${mousePosition.y * 0.1}deg) rotateY(${mousePosition.x * 0.1}deg)"
-			on:mouseenter={(e) => handleMouseEnter(e.currentTarget)}
-			on:mouseleave={(e) => handleMouseLeave(e.currentTarget)}
-		>
-			<!-- Efecto de borde animado -->
-			<div class="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-green-600 rounded-2xl opacity-0 group-hover:opacity-100 transition duration-500 blur group-hover:blur-sm"></div>
-			<div class="absolute inset-0 bg-[#141c2f] rounded-2xl"></div>
+                <a
+                    href="#contacto"
+                    class="mt-6 inline-flex items-center gap-2 bg-purple-600 hover:bg-purple-700 px-6 py-3 rounded-xl font-semibold shadow-lg transition relative overflow-hidden"
+                >
+                    <span class="relative z-10">Contáctame</span>
+                    <span class="relative z-10 text-lg">→</span>
+                    <span class="absolute inset-0 bg-gradient-to-r from-purple-400/40 to-purple-700/40 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300" />
+                </a>
+            </div>
+        </div>
 
-			<div class="relative z-10">
-				<h2 class="text-2xl font-bold mb-3 flex items-center gap-2">
-					<span class="text-purple-400 text-3xl animate-spin-slow">🧩</span>
-					Habilidades Técnicas
-				</h2>
+        <!-- ========== TARJETA: HABILIDADES ========== -->
+        <div
+            class="bg-[#141c2f] rounded-2xl p-8 border border-white/10 shadow-xl relative group transition-all duration-500 hover:scale-[1.03]"
+            style={`transform: translateX(${mousePosition.x * -0.15}px) translateY(${mousePosition.y * -0.15}px);`}
+        >
+            <div class="pointer-events-none absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-blue-500/40 to-emerald-500/40 opacity-0 group-hover:opacity-100 blur-xl transition" />
 
-				<p class="text-gray-400 mb-4 transform transition-transform duration-300 group-hover:translate-x-2">
-					Haz clic en una categoría para ver detalles:
-				</p>
+            <div class="relative z-10">
+                <h2 class="text-3xl font-bold mb-4 flex items-center gap-2">
+                    <span class="text-purple-400 text-4xl animate-spin-slow">🧩</span>
+                    Habilidades Técnicas
+                </h2>
 
-				<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <p class="text-gray-400 mb-4">
+                    Haz clic en una categoría para ver las tecnologías que utilizo:
+                </p>
 
-					{#each [
-						{ key: "frontend", name: "Frontend", emoji: "🎨", color: "text-pink-400" },
-						{ key: "backend", name: "Backend", emoji: "🛠️", color: "text-green-400" },
-						{ key: "database", name: "Base de Datos", emoji: "🗄️", color: "text-yellow-400" },
-						{ key: "devops", name: "DevOps", emoji: "⚙️", color: "text-blue-400" }
-					] as category, index}
-						<div 
-							bind:this={cardRefs[index]}
-							class="bg-[#1b263b] p-5 rounded-xl border border-white/5 cursor-pointer relative overflow-hidden group transform-style-3d transition-all duration-300 hover:scale-105"
-							style="transform: perspective(1000px) rotateX(${mousePosition.y * 0.05}deg) rotateY(${mousePosition.x * 0.05}deg)"
-							on:click={() => openModal(category.key)}
-							on:mouseenter={(e) => handleMouseEnter(e.currentTarget, index)}
-							on:mouseleave={(e) => handleMouseLeave(e.currentTarget, index)}
-						>
-							<!-- Efecto de brillo al hover -->
-							<div class="absolute inset-0 bg-gradient-to-br from-{category.color.replace('text-', '')}/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-							
-							<!-- Partículas flotantes -->
-							<div class="absolute inset-0 overflow-hidden">
-								<div class="absolute w-2 h-2 bg-current rounded-full opacity-20 group-hover:opacity-40 transition-all duration-1000"
-									style="top: 20%; left: 20%; animation: float 3s ease-in-out infinite;"></div>
-								<div class="absolute w-1 h-1 bg-current rounded-full opacity-20 group-hover:opacity-40 transition-all duration-1000 delay-300"
-									style="top: 60%; left: 70%; animation: float 4s ease-in-out infinite;"></div>
-							</div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {#each skillCategories as c}
+                        <button
+                            type="button"
+                            class="bg-[#1b263b] p-5 rounded-xl border border-white/10 cursor-pointer group/card
+                                   relative overflow-hidden transition-all duration-300
+                                   hover:-translate-y-2 hover:shadow-2xl hover:shadow-purple-700/40"
+                            on:click={() => openModal(c.key)}
+                        >
+                            <!-- Halo detrás del icono -->
+                            <div class="absolute -top-6 -left-8 w-24 h-24 rounded-full bg-purple-500/20 blur-2xl opacity-0 group-hover/card:opacity-100 transition" />
 
-							<span class="{category.color} text-3xl block transform transition-transform duration-300 group-hover:scale-125 group-hover:rotate-12">{category.emoji}</span>
-							<p class="font-semibold mt-2 transform transition-transform duration-300 group-hover:translate-y-1">{category.name}</p>
-							<p class="text-gray-400 text-sm mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-								{TECH[category.key].length} tecnologías
-							</p>
-						</div>
-					{/each}
+                            <div class="relative flex items-center gap-4">
+                                <!-- Icono grande con 3D / rotación -->
+                                <div
+                                    class="relative w-12 h-12 rounded-2xl bg-purple-500/10 flex items-center justify-center
+                                           transition-transform duration-300
+                                           group-hover/card:-translate-y-1 group-hover/card:rotate-6 group-hover/card:scale-110"
+                                >
+                                    <span class={`text-2xl ${c.accentClass}`}>{c.emoji}</span>
 
-				</div>
-			</div>
-		</div>
+                                    <!-- mini glow -->
+                                    <div class="absolute inset-0 rounded-2xl border border-purple-500/40 opacity-0 group-hover/card:opacity-100 transition" />
+                                </div>
 
-	</div>
+                                <div class="flex-1 text-left">
+                                    <p class="font-semibold text-sm md:text-base">
+                                        {c.name}
+                                    </p>
+                                    <p class="text-gray-400 text-xs md:text-sm mt-1">
+                                        {TECH[c.key].length} tecnologías
+                                    </p>
+                                </div>
+                            </div>
 
-	<!-- ====================== HOBBIES ====================== -->
-	<div 
-		class="bg-[#141c2f] rounded-2xl p-8 border border-white/5 shadow-xl mt-10 relative group transform-style-3d transition-all duration-500"
-		style="transform: perspective(1000px) rotateX(${mousePosition.y * 0.05}deg) rotateY(${mousePosition.x * 0.05}deg)"
-		on:mouseenter={(e) => handleMouseEnter(e.currentTarget)}
-		on:mouseleave={(e) => handleMouseLeave(e.currentTarget)}
-	>
-		<!-- Efecto de borde animado -->
-		<div class="absolute -inset-0.5 bg-gradient-to-r from-yellow-600 to-orange-600 rounded-2xl opacity-0 group-hover:opacity-100 transition duration-500 blur group-hover:blur-sm"></div>
-		<div class="absolute inset-0 bg-[#141c2f] rounded-2xl"></div>
+                            <!-- Línea inferior animada -->
+                            <div class="mt-3 h-[2px] w-full bg-gradient-to-r from-transparent via-purple-500/70 to-transparent scale-x-0 origin-center group-hover/card:scale-x-100 transition-transform duration-300" />
+                        </button>
+                    {/each}
+                </div>
+            </div>
+        </div>
+    </div>
 
-		<div class="relative z-10">
-			<h2 class="text-2xl font-bold mb-3 flex items-center gap-2">
-				<span class="text-purple-400 text-3xl animate-bounce-gentle">⭐</span>
-				Hobbies e Intereses
-			</h2>
+    <!-- ================= HOBBIES ================= -->
+  <!-- ================= HOBBIES (VERSIÓN PREMIUM) ================= -->
+<div
+    class="group relative bg-[#101727]/80 backdrop-blur-xl border border-white/10 
+           rounded-2xl p-10 mt-20 shadow-2xl transition-all duration-500 
+           hover:shadow-purple-900/40 hover:scale-[1.015]"
+    style={`transform: translateX(${mousePosition.x * 0.1}px) translateY(${mousePosition.y * 0.1}px);`}
+>
 
-			<div class="space-y-4 mt-4">
+    <!-- Glow exterior -->
+    <div
+        class="absolute inset-0 -z-10 rounded-3xl opacity-0 group-hover:opacity-40
+               bg-gradient-to-r from-purple-600/40 to-orange-500/40 blur-3xl 
+               transition-all duration-700"
+    ></div>
 
-				{#each [
-					{ emoji: "⚽", title: "Fútbol", desc: "Jugar, entrenar y ver partidos" },
-					{ emoji: "🎮", title: "Videojuegos", desc: "Shooter, estrategia y mundo abierto" },
-					{ emoji: "🎬", title: "Cine", desc: "Terror, romance, acción y guerra" }
-				] as hobby, index}
-					<div 
-						class="flex items-center gap-4 bg-[#1b263b] p-4 rounded-xl hover:bg-[#22314f] transition-all duration-300 border border-white/5 group/hobby transform hover:scale-105 hover:-translate-y-1 cursor-pointer"
-						on:mouseenter={(e) => e.currentTarget.style.transform = 'scale(1.05) translateY(-5px)'}
-						on:mouseleave={(e) => e.currentTarget.style.transform = 'scale(1) translateY(0)'}
-					>
-						<span class="text-3xl transform transition-transform duration-300 group-hover/hobby:scale-125 group-hover/hobby:rotate-12">{hobby.emoji}</span>
-						<div class="flex-1">
-							<p class="font-semibold transform transition-transform duration-300 group-hover/hobby:translate-x-2">{hobby.title}</p>
-							<p class="text-gray-400 text-sm transform transition-transform duration-300 group-hover/hobby:translate-x-2">{hobby.desc}</p>
-						</div>
-						<div class="w-2 h-2 bg-purple-400 rounded-full opacity-0 group-hover/hobby:opacity-100 transition-opacity duration-300 animate-ping"></div>
-					</div>
-				{/each}
+    <h2 class="text-4xl font-bold mb-8 flex items-center gap-3">
+        <span class="text-yellow-400 text-5xl drop-shadow animate-bounce">⭐</span>
+        Hobbies e Intereses
+    </h2>
 
-			</div>
-		</div>
-	</div>
+    <div class="space-y-6">
+
+        <!-- CARD REUSABLE -->
+        {#each [
+            {
+                emoji: "⚽",
+                title: "Fútbol",
+                desc: "Jugar, entrenar y disfrutar buenos partidos con amigos y familia.",
+                rotation: "-rotate-6"
+            },
+            {
+                emoji: "🎮",
+                title: "Videojuegos",
+                desc: "Shooters, estrategia, cooperativos o mundo abierto… mientras haya diversión, ahí estoy.",
+                rotation: "rotate-3"
+            },
+            {
+                emoji: "🎬",
+                title: "Cine",
+                desc: "Acción, terror, romance o guerra… si la historia engancha, me la termino.",
+                rotation: "-rotate-3"
+            }
+        ] as hobbie}
+            <div
+                class="relative flex items-center gap-5 bg-[#151f32]/90 backdrop-blur-lg 
+                       p-5 rounded-xl border border-white/5
+                       hover:bg-[#1b2940] transition-all duration-300
+                       hover:-translate-y-2 hover:shadow-xl hover:shadow-purple-700/30"
+            >
+                <!-- Icono -->
+                <div
+                    class={`w-14 h-14 rounded-2xl bg-purple-500/10 flex items-center justify-center
+                            text-3xl transition-all duration-300 
+                            group-hover:scale-110 group-hover:${hobbie.rotation}`}
+                >
+                    {hobbie.emoji}
+                </div>
+
+                <!-- Texto -->
+                <div>
+                    <p class="font-semibold text-lg">{hobbie.title}</p>
+                    <p class="text-gray-400 text-sm">{hobbie.desc}</p>
+                </div>
+
+                <!-- Glow al pasar -->
+                <div
+                    class="absolute inset-0 opacity-0 group-hover:opacity-20 rounded-xl
+                           bg-gradient-to-r from-purple-500/40 to-indigo-500/40 blur-xl
+                           transition-all duration-500 pointer-events-none"
+                ></div>
+            </div>
+        {/each}
+    </div>
+</div>
+
 
 </section>
 
 {#if modalOpen}
-	<TechModal 
-		category={selectedCategory} 
-		tech={TECH[selectedCategory]} 
-		on:close={closeModal} 
-	/>
+    <TechModal
+        category={selectedCategory}
+        tech={TECH[selectedCategory]}
+        on:close={closeModal}
+    />
 {/if}
 
 <style>
-	/* Animaciones personalizadas */
-	@keyframes typing {
-		from { opacity: 0; transform: translateY(20px); }
-		to { opacity: 1; transform: translateY(0); }
-	}
+    @keyframes typing {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
 
-	@keyframes float {
-		0%, 100% { transform: translateY(0px) rotate(0deg); }
-		50% { transform: translateY(-10px) rotate(180deg); }
-	}
+    @keyframes fade-in-up {
+        from {
+            opacity: 0;
+            transform: translateY(25px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
 
-	@keyframes bounce-gentle {
-		0%, 100% { transform: translateY(0); }
-		50% { transform: translateY(-5px); }
-	}
+    @keyframes spin-slow {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
 
-	@keyframes pulse-slow {
-		0%, 100% { opacity: 0.3; }
-		50% { opacity: 0.6; }
-	}
+    @keyframes bounce-soft {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-6px);
+        }
+    }
 
-	@keyframes spin-slow {
-		from { transform: rotate(0deg); }
-		to { transform: rotate(360deg); }
-	}
+    .animate-typing {
+        animation: typing 0.45s ease-out forwards;
+        opacity: 0;
+    }
 
-	@keyframes fade-in-up {
-		from {
-			opacity: 0;
-			transform: translateY(30px);
-		}
-		to {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	}
+    .animate-fade-in-up {
+        animation: fade-in-up 1s ease-out 0.4s forwards;
+        opacity: 0;
+    }
 
-	.animate-typing {
-		animation: typing 0.6s ease-out forwards;
-		opacity: 0;
-	}
+    .animate-spin-slow {
+        animation: spin-slow 8s linear infinite;
+    }
 
-	.animate-fade-in-up {
-		animation: fade-in-up 1s ease-out 0.5s forwards;
-		opacity: 0;
-	}
-
-	.animate-bounce-gentle {
-		animation: bounce-gentle 2s ease-in-out infinite;
-	}
-
-	.animate-pulse-slow {
-		animation: pulse-slow 3s ease-in-out infinite;
-	}
-
-	.animate-spin-slow {
-		animation: spin-slow 8s linear infinite;
-	}
-
-	.transform-style-3d {
-		transform-style: preserve-3d;
-	}
-
-	/* Mejoras de rendimiento para transformaciones 3D */
-	.perspective-1000 {
-		perspective: 1000px;
-	}
-
-	/* Suavizar las animaciones */
-	* {
-		transform-style: preserve-3d;
-		backface-visibility: hidden;
-	}
+    .animate-bounce-soft {
+        animation: bounce-soft 2.4s ease-in-out infinite;
+    }
 </style>

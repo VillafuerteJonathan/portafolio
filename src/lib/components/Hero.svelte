@@ -17,7 +17,7 @@
 
 <section 
     on:mousemove={handleMouseMove}
-    class="relative pt-24 pb-32 px-6 md:px-16 overflow-hidden"
+    class="relative pt-24 pb-5 px-6 md:px-16 overflow-hidden"
 >
 
     <!-- BURBUJAS ANIMADAS -->
