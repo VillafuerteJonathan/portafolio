@@ -25,9 +25,20 @@ export const PROJECTS = [
         id: 3,
         title: "Portfolio CMS",
         desc: "Sistema de gestión de contenidos para portafolios con editor visual y generación automática de páginas.",
-        img: "/images/project-cms.jpg",
-        tech: ["Next.js", "PostgreSQL", "TailwindCSS"],
+        img: "/assets/images/plantaenferma.png",
+        tech: ["Andoid Studio", "Python", "IA","TensorFlow / Keras" ,"Jupyter Notebook"],
         code: "https://github.com/turepo/portfolio-cms",
+        video: "/assets/videos/plantaenferma.mp4",
+        
+    },
+    {
+        id: 3,
+        title: "Portfolio CMS",
+        desc: "Sistema de gestión de contenidos para portafolios con editor visual y generación automática de páginas.",
+        img: "/assets/images/plantaenferma.png",
+        tech: ["Andoid Studio", "Python", "IA","TensorFlow / Keras" ,"Jupyter Notebook"],
+        code: "https://github.com/turepo/portfolio-cms",
+        video: "/assets/videos/plantaenferma.mp4",
         
     }
-];
+];  

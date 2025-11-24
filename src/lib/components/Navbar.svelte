@@ -34,7 +34,7 @@
 		{#each [
 			['Inicio', '/'],
 			['Sobre Mí', '#sobre-mi'],
-			['Proyectos', '/proyectos'],
+			['Proyectos', '#proyectos'],
 			['Certificados', '/certificados'],
 			['Estudios', '/estudios'],
 			['Contacto', '/contacto']
