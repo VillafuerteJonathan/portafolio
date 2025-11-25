@@ -1,7 +1,6 @@
 <script>
-    import { Github, Linkedin, Mail, MessageCircle } from "lucide-svelte";
+    import { Github, Linkedin, Mail } from "lucide-svelte";
 
-    // Parallax
     let mouseX = 0;
     let mouseY = 0;
 
@@ -16,10 +15,11 @@
 
 <section 
     on:mousemove={handleMouseMove}
+    aria-label="Presentación principal"
     class="relative pt-24 pb-5 px-6 md:px-16 overflow-hidden"
 >
 
-    <!-- BURBUJAS ANIMADAS -->
+    <!-- BURBUJAS -->
     <div class="absolute inset-0 pointer-events-none z-0">
         {#each Array(20) as _, i}
             <div 
@@ -34,7 +34,7 @@
         {/each}
     </div>
 
-    <!-- CONTENIDO -->
+    <!-- GRID -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center relative z-10">
 
         <!-- TEXTOS -->
@@ -64,6 +64,7 @@
                 <a
                     href="/assets/pdf/micv.pdf"
                     download="CV_Jonathan_Villafuerte.pdf"
+                    aria-label="Descargar currículum"
                     class="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-xl text-sm
                     font-semibold shadow-lg shadow-purple-600/20 transition flex items-center gap-2"
                 >
@@ -73,6 +74,7 @@
 
                 <a
                     href="#contacto"
+                    aria-label="Ir a contacto"
                     class="px-6 py-3 border border-gray-600 hover:border-white text-gray-200 hover:text-white
                     rounded-xl text-sm font-semibold transition"
                 >
@@ -80,57 +82,63 @@
                 </a>
             </div>
 
-            <!-- ICONOS REDES -->
+            <!-- REDES -->
             <div class="flex gap-6 pt-4 text-2xl">
 
                 <a 
-                    href="hhttps://github.com/VillafuerteJonathan"
+                    href="https://github.com/VillafuerteJonathan"
+                    aria-label="GitHub"
                     target="_blank"
+                    rel="noopener noreferrer"
                     class="p-2 rounded-xl bg-white/5 hover:bg-purple-600/30 transition-all border border-white/10"
                 >
                     <Github size={26} class="text-gray-300 hover:text-purple-400 transition" />
                 </a>
 
                 <a 
-                    href="www.linkedin.com/in/eduardo-quispe-48a756381"
+                    href="https://www.linkedin.com/in/eduardo-quispe-48a756381"
+                    aria-label="LinkedIn"
                     target="_blank"
+                    rel="noopener noreferrer"
                     class="p-2 rounded-xl bg-white/5 hover:bg-purple-600/30 transition-all border border-white/10"
                 >
                     <Linkedin size={26} class="text-gray-300 hover:text-purple-400 transition" />
                 </a>
 
+                <!-- DISCORD -->
                 <a 
                     href="https://discord.com/users/740763335343210556"
+                    aria-label="Perfil de Discord"
                     target="_blank"
+                    rel="noopener noreferrer"
                     class="p-2 rounded-xl bg-white/5 hover:bg-purple-600/30 transition-all border border-white/10"
                 >
+                    <!-- SVG original -->
                     <svg 
-                        xmlns="http://www.w3.org/2000/svg" 
-                        width="26" 
-                        height="26" 
-                        viewBox="0 0 24 24" 
-                        fill="currentColor" 
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="26"
+                        height="26"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
                         class="text-gray-300 hover:text-purple-400 transition"
                     >
-                        <path d="M20.317 4.369a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.249a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.249.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.058a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.027c.462-.63.873-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.108 13.108 0 01-1.872-.892.077.077 0 01-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 01.077-.01c3.927 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.009c.12.099.246.198.372.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.893.076.076 0 00-.04.105c.36.698.771 1.364 1.225 1.994a.076.076 0 00.084.027 19.876 19.876 0 005.995-3.03.077.077 0 00.03-.056c.5-5.177-.838-9.673-3.548-13.662a.061.061 0 00-.031-.028zM8.02 15.33c-1.182 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.213 0 2.178 1.096 2.157 2.419 0 1.334-.955 2.419-2.157 2.419zm7.975 0c-1.182 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.213 0 2.178 1.096 2.157 2.419 0 1.334-.944 2.419-2.157 2.419z"/>
+                       <path d="M20.317 4.369a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.249a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.249.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.058a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.027c.462-.63.873-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.108 13.108 0 01-1.872-.892.077.077 0 01-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 01.077-.01c3.927 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.009c.12.099.246.198.372.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.893.076.076 0 00-.04.105c.36.698.771 1.364 1.225 1.994a.076.076 0 00.084.027 19.876 19.876 0 005.995-3.03.077.077 0 00.03-.056c.5-5.177-.838-9.673-3.548-13.662a.061.061 0 00-.031-.028zM8.02 15.33c-1.182 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.213 0 2.178 1.096 2.157 2.419 0 1.334-.955 2.419-2.157 2.419zm7.975 0c-1.182 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.213 0 2.178 1.096 2.157 2.419 0 1.334-.944 2.419-2.157 2.419z"> </path>
+
                     </svg>
                 </a>
 
-
-               <a
-                    href="https://mail.google.com/mail/?view=cm&fs=1&to=eduardovillaquis2@gmail.com&su=Contacto%20desde%20tu%20portafolio&body=Hola,%20quiero%20ponerme%20en%20contacto..."
-                    target="_blank"
-                    rel="noopener noreferrer"
+                <a
+                    href="mailto:eduardovillaquis2@gmail.com"
+                    aria-label="Enviar correo"
                     class="p-2 rounded-xl bg-white/5 hover:bg-purple-600/30 transition-all border border-white/10"
                 >
                     <Mail size={26} class="text-gray-300 hover:text-purple-400 transition" />
                 </a>
 
-
             </div>
         </div>
 
-        <!-- IMAGEN 3D -->
+        <!-- IMAGEN -->
         <div 
             class="flex justify-center md:justify-end relative fade-in"
             style="transform: translate(calc({mouseX}px), calc({mouseY}px));"
@@ -162,20 +170,18 @@
                         class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
                         style="opacity: {imgHover ? 0 : 1};"
                     />
-
                     <img
                         src="/img/avatar.png"
-                        alt="Avatar"
+                        alt="Avatar alternativo"
                         class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
                         style="opacity: {imgHover ? 1 : 0};"
                     />
                 </div>
             </div>
         </div>
-
     </div>
 
-    <!-- INDICADOR DE SCROLL -->
+    <!-- SCROLL -->
     <div class="flex justify-center mt-5">
         <div class="w-10 h-16 border-2 border-purple-400 rounded-3xl flex justify-center items-start p-2">
             <div class="w-2 h-3 bg-purple-400 rounded-full animate-bounce"></div>
@@ -185,8 +191,6 @@
 </section>
 
 <style>
-
-    /* BURBUJAS */
     .bubble {
         position: absolute;
         bottom: 10rem;
@@ -206,7 +210,6 @@
         100% { transform: translateY(-520px) scale(1.3); opacity: 0; }
     }
 
-    /* FADE-IN */
     .fade-in {
         animation: fadeInAnimation 1s ease forwards;
         opacity: 0;

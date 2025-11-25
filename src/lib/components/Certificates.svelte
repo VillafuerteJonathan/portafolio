@@ -7,6 +7,8 @@
     let modalOpen = false;
     let currentSlide = 0;
 
+    let swiperEl; // referencia segura
+
     function openModal(index) {
         selectedIndex = index;
         modalOpen = true;
@@ -16,48 +18,45 @@
         modalOpen = false;
     }
 
-    function prevCertificate() {
-        selectedIndex = (selectedIndex - 1 + CERTIFICATES.length) % CERTIFICATES.length;
-    }
-
-    function nextCertificate() {
-        selectedIndex = (selectedIndex + 1) % CERTIFICATES.length;
-    }
-
-    function goToSlide(index) {
-        currentSlide = index;
-    }
-
-    // Swiper setup
     onMount(async () => {
-        const swiperBundle = await import("swiper/element/bundle");
-        swiperBundle.register();
+        const { register } = await import("swiper/element/bundle");
+        register();
 
-        const swiperEl = document.querySelector("#cert-swiper");
+        swiperEl = document.querySelector("#cert-swiper");
 
-        if (swiperEl) {
-            swiperEl.params = {
-                slidesPerView: 1,
-                spaceBetween: 30,
-                navigation: true,
-                pagination: { clickable: true },
-                breakpoints: {
-                    768: { slidesPerView: 1 },
-                    1024: { slidesPerView: 1.2 }
-                }
-            };
+        if (!swiperEl) return;
 
-            swiperEl.initialize();
+        swiperEl.params = {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            navigation: true,
+            pagination: { clickable: true },
+            breakpoints: {
+                768: { slidesPerView: 1 },
+                1024: { slidesPerView: 1.2 }
+            }
+        };
 
-            // Actualizar slide actual
-            swiperEl.addEventListener('slidechange', (e) => {
-                currentSlide = e.detail[0].activeIndex;
-            });
-        }
+        swiperEl.initialize();
+
+        swiperEl.addEventListener("slidechange", (e) => {
+            const idx = e.detail[0]?.activeIndex;
+            if (idx !== undefined) currentSlide = idx;
+        });
     });
+
+    function goPrev() {
+        swiperEl?.swiper?.slidePrev();
+    }
+    function goNext() {
+        swiperEl?.swiper?.slideNext();
+    }
+    function goTo(i) {
+        swiperEl?.swiper?.slideTo(i);
+    }
 </script>
 
-<section id = "certificados" class="pt-2 pb-8 px-6 md:px-66 text-white relative" >
+<section id="certificados" class="pt-2 pb-8 px-6 md:px-66 text-white relative">
 
     <div class="text-center mb-8">
         <h1 class="text-5xl font-extrabold">
@@ -69,14 +68,18 @@
         </p>
     </div>
 
-    <!-- Swiper Container -->
+    <!-- Swiper -->
     <swiper-container id="cert-swiper" class="block w-full pb-10">
+
         {#each CERTIFICATES as c, index}
             <swiper-slide>
-                <div
-                    class="bg-[#141c2f] border border-white/10 rounded-2xl p-6 shadow-xl hover:shadow-purple-900/40 
-                           transition-all duration-500 cursor-pointer group relative h-full"
+                <button
                     on:click={() => openModal(index)}
+                    aria-label={`Abrir certificado ${c.title}`}
+                    type="button"
+                    class="bg-[#141c2f] border border-white/10 rounded-2xl p-6 shadow-xl 
+                           hover:shadow-purple-900/40 transition-all duration-500 
+                           group relative w-full h-full text-left"
                 >
                     <div class="w-full flex justify-center mb-4">
                         <img
@@ -86,31 +89,31 @@
                         />
                     </div>
 
-                    <div class="absolute inset-0 flex items-center justify-center text-white text-lg font-semibold opacity-0 
-                               group-hover:opacity-100 transition bg-black/40 rounded-xl pointer-events-none">
+                    <div 
+                        class="absolute inset-0 flex items-center justify-center text-white text-lg 
+                               font-semibold opacity-0 group-hover:opacity-100 
+                               transition bg-black/40 rounded-xl pointer-events-none">
                         Click para ampliar
                     </div>
 
                     <div class="mt-4 text-center">
                         <h3 class="text-xl font-bold text-purple-300 mb-2">{c.title}</h3>
-                        <p class="text-gray-300 text-sm">
-                            Emitido por: <b>{c.institution}</b>
-                        </p>
+                        <p class="text-gray-300 text-sm">Emitido por: <b>{c.institution}</b></p>
                         <p class="text-gray-500 text-sm mt-1">Fecha: {c.date}</p>
                     </div>
-                </div>
+
+                </button>
             </swiper-slide>
         {/each}
+
     </swiper-container>
 
-    <!-- Controles Personalizados -->
+    <!-- CONTROLES PERSONALIZADOS -->
     <div class="flex justify-center items-center gap-8 mt-2">
+
         <!-- Botón Anterior -->
         <button 
-            on:click={() => {
-                const swiperEl = document.querySelector("#cert-swiper");
-                if (swiperEl) swiperEl.swiper.slidePrev();
-            }}
+            on:click={goPrev}
             class="p-3 rounded-full bg-[#1e2a3f] hover:bg-purple-900/30 border border-white/10 
                    transition-all duration-300 hover:scale-110"
             aria-label="Certificado anterior"
@@ -124,26 +127,19 @@
         <div class="flex gap-3">
             {#each CERTIFICATES as _, i}
                 <button 
-                    on:click={() => {
-                        const swiperEl = document.querySelector("#cert-swiper");
-                        if (swiperEl) swiperEl.swiper.slideTo(i);
-                    }}
+                    on:click={() => goTo(i)}
                     class={`w-3 h-3 rounded-full transition-all duration-300 ${
-                        currentSlide === i 
-                            ? 'bg-purple-500 scale-125' 
-                            : 'bg-white/30 hover:bg-white/50'
+                        currentSlide === i ? "bg-purple-500 scale-125" : "bg-white/30 hover:bg-white/50"
                     }`}
                     aria-label={`Ir al certificado ${i + 1}`}
+                    type="button"
                 ></button>
             {/each}
         </div>
 
         <!-- Botón Siguiente -->
         <button 
-            on:click={() => {
-                const swiperEl = document.querySelector("#cert-swiper");
-                if (swiperEl) swiperEl.swiper.slideNext();
-            }}
+            on:click={goNext}
             class="p-3 rounded-full bg-[#1e2a3f] hover:bg-purple-900/30 border border-white/10 
                    transition-all duration-300 hover:scale-110"
             aria-label="Siguiente certificado"
@@ -152,9 +148,10 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width={2} d="M9 5l7 7-7 7" />
             </svg>
         </button>
+
     </div>
 
-    <!-- Modal -->
+    <!-- MODAL -->
     {#if modalOpen}
         <CertificateModal
             open={modalOpen}
@@ -163,37 +160,9 @@
             institution={CERTIFICATES[selectedIndex].institution}
             date={CERTIFICATES[selectedIndex].date}
             on:close={closeModal}
-        >
-            <!-- Controles de navegación en el modal -->
-            <div class="flex justify-between items-center mt-6 pt-6 border-t border-white/10 px-4">
-                <button
-                    on:click={prevCertificate}
-                    class="flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 
-                           rounded-lg transition-colors duration-200 text-white"
-                >
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width={2} d="M15 19l-7-7 7-7" />
-                    </svg>
-                    Anterior
-                </button>
-
-                <span class="text-gray-300 text-sm">
-                    {selectedIndex + 1} de {CERTIFICATES.length}
-                </span>
-
-                <button
-                    on:click={nextCertificate}
-                    class="flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 
-                           rounded-lg transition-colors duration-200 text-white"
-                >
-                    Siguiente
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                </button>
-            </div>
-        </CertificateModal>
+        />
     {/if}
+
 </section>
 
 <style>

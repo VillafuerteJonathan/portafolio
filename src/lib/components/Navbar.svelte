@@ -1,9 +1,9 @@
 <script>
 	let isOpen = false;
-	let tiltX = 0;
-	let tiltY = 0;
 
-	
+	function toggleMenu() {
+		isOpen = !isOpen;
+	}
 </script>
 
 <!-- BACKGROUND GLOW -->
@@ -11,17 +11,15 @@
 
 <!-- NAVBAR -->
 <nav
-	on:mousemove={handleMouseMove}
-	class="fixed top-0 left-0 right-0 h-[70px] z-50 px-8 md:px-14 flex items-center justify-between transition-all duration-3   00
-           bg-black/25 backdrop-blur-2xl border-b border-white/10 shadow-lg"
-	style="transform: perspective(900px) rotateX({tiltX}deg) rotateY({tiltY}deg);"
+	class="fixed top-0 left-0 right-0 h-[70px] z-50 px-8 md:px-14 flex items-center justify-between 
+           transition-all duration-300 bg-black/25 backdrop-blur-2xl border-b border-white/10 shadow-lg"
 >
 
 	<!-- LOGO -->
 	<a
 		href="/"
 		class="text-2xl font-bold tracking-tight select-none text-white relative group"
-		style="transform: translateZ(20px);"
+		aria-label="Ir al inicio"
 	>
 		<span class="group-hover:text-purple-400 transition">JV</span>
 
@@ -37,7 +35,7 @@
 			['Proyectos', '#proyectos'],
 			['Certificados', '#certificados'],
 			['Estudios', '/estudios'],
-			['Contacto', '/contacto']
+			['Contacto', '#contacto']
 		] as item}
 			<li>
 				<a
@@ -46,14 +44,22 @@
 				>
 					{item[0]}
 
-					<!-- SUBRAYADO ANIMADO -->
+					<!-- SUBRAYADO -->
 					<span class="absolute left-0 -bottom-1 w-0 h-[2px] bg-purple-500 group-hover:w-full transition-all duration-300"></span>
 				</a>
 			</li>
 		{/each}
 	</ul>
 
-	
+	<!-- BOTÓN MENÚ MOBILE -->
+	<button 
+		class="md:hidden text-white text-3xl" 
+		on:click={toggleMenu}
+		aria-label="Abrir menú móvil"
+	>
+		{#if isOpen} ✕ {:else} ☰ {/if}
+	</button>
+
 </nav>
 
 <!-- MENÚ MÓVIL -->
@@ -61,16 +67,19 @@
 	<div
 		class="md:hidden fixed top-[70px] left-0 right-0 bg-black/40 backdrop-blur-xl
 		       border-b border-white/5 px-8 py-6 text-lg text-gray-200 flex flex-col gap-6 z-40 animate-fadeIn"
+		aria-label="Menú móvil"
 	>
 		{#each [
 			['Inicio', '/'],
-			['Sobre Mí', '/sobre-mi'],
-			['Proyectos', '/proyectos'],
-			['Certificados', '/certificados'],
+			['Sobre Mí', '#sobre-mi'],
+			['Proyectos', '#proyectos'],
+			['Certificados', '#certificados'],
 			['Estudios', '/estudios'],
-			['Contacto', '/contacto']
+			['Contacto', '#contacto']
 		] as item}
-			<a class="hover:text-purple-300 transition" href={item[1]}>{item[0]}</a>
+			<a class="hover:text-purple-300 transition" href={item[1]} on:click={() => isOpen = false}>
+				{item[0]}
+			</a>
 		{/each}
 	</div>
 {/if}
@@ -79,7 +88,7 @@
 	@keyframes fadeIn {
 		from {
 			opacity: 0;
-			transform: translateY(-6\px);
+			transform: translateY(-6px);
 		}
 		to {
 			opacity: 1;

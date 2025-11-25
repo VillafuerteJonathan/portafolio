@@ -1,5 +1,4 @@
 <script>
-    // Asegúrate de instalar: npm i lucide-svelte
     import { slideFrom } from "$lib/utils/slideFrom.js";
     import {
         GraduationCap,
@@ -43,13 +42,14 @@
 
 <section
     id="educacion"
+    aria-label="Sección de educación y experiencia"
     class="pt-18 pb-24 px-6 md:px-20 text-white relative overflow-hidden"
 >
 
     <!-- Glow de fondo -->
     <div class="pointer-events-none absolute inset-0 opacity-20">
-        <div class="absolute -top-40 left-10 w-72 h-72 bg-purple-700/30 blur-[90px] rounded-full" />
-        <div class="absolute bottom-0 right-10 w-80 h-80 bg-blue-500/25 blur-[95px] rounded-full" />
+        <div class="absolute -top-40 left-10 w-72 h-72 bg-purple-700/30 blur-[90px] rounded-full"></div>
+        <div class="absolute bottom-0 right-10 w-80 h-80 bg-blue-500/25 blur-[95px] rounded-full"></div>
     </div>
 
     <!-- TÍTULO -->
@@ -77,35 +77,37 @@
     <!-- TIMELINE GRID -->
     <div class="relative max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 z-10">
 
-        <!-- Línea central animada (solo desktop) -->
+        <!-- Línea central -->
         <div
             class="hidden md:block absolute left-1/2 top-2 bottom-2 w-[3px] rounded-full overflow-hidden"
+            role="presentation"
         >
-            <div class="w-full h-full bg-slate-800" />
-            <div class="timeline-gradient" />
+            <div class="w-full h-full bg-slate-800"></div>
+            <div class="timeline-gradient"></div>
         </div>
 
-        <!-- EDUCACIÓN (IZQUIERDA) -->
+        <!-- EDUCACIÓN -->
         <div class="space-y-10 relative">
-
             {#each education as edu}
                 <article
+                    aria-label={`Educación: ${edu.title}`}
                     use:slideFrom={{ direction: "left", distance: 110, duration: 750 }}
                     class="relative group bg-[#0b1220]/90 border border-white/10 rounded-2xl
                            p-7 md:p-8 transform-gpu transition-all duration-500
                            hover:-translate-y-3 hover:-rotate-1 hover:shadow-2xl hover:shadow-purple-900/40
                            hover:border-purple-500/60"
                 >
-                    <!-- Punto en la línea -->
+                    <!-- Punto -->
                     <div
                         class="hidden md:flex absolute -right-[38px] top-10 items-center justify-center"
+                        role="presentation"
                     >
                         <div class="w-4 h-4 rounded-full bg-slate-900 border border-purple-400 shadow-lg shadow-purple-500/60 relative">
-                            <div class="absolute inset-0 rounded-full border border-purple-400/60 animate-ping-slow" />
+                            <div class="absolute inset-0 rounded-full border border-purple-400/60 animate-ping-slow"></div>
                         </div>
                     </div>
 
-                    <!-- Header tarjeta -->
+                    <!-- Header -->
                     <header class="flex items-start md:items-center gap-3 mb-4">
                         <div
                             class="w-11 h-11 md:w-12 md:h-12 rounded-2xl bg-purple-500/10 border border-purple-400/40
@@ -125,12 +127,13 @@
                         </div>
                     </header>
 
-                    <!-- Meta info -->
+                    <!-- Meta -->
                     <div class="flex flex-wrap items-center gap-3 text-gray-400 text-xs md:text-sm mb-3">
                         <span class="inline-flex items-center gap-1.5 bg-white/5 px-3 py-1 rounded-full">
                             <MapPin size={14} class="text-purple-300" />
                             <span>{edu.location}</span>
                         </span>
+
                         <span class="inline-flex items-center gap-1.5 bg-white/5 px-3 py-1 rounded-full">
                             <CalendarRange size={14} class="text-purple-300" />
                             <span>{edu.date}</span>
@@ -142,14 +145,14 @@
                     </p>
 
                     <h3 class="text-sm font-semibold text-gray-100 mb-2 flex items-center gap-2">
-                        <span class="w-1.5 h-1.5 bg-purple-400 rounded-full" />
+                        <span class="w-1.5 h-1.5 bg-purple-400 rounded-full"></span>
                         Logros destacados
                     </h3>
 
                     <ul class="text-gray-300 text-sm space-y-1.5">
                         {#each edu.achievements as ach}
                             <li class="flex gap-2">
-                                <span class="mt-[6px] w-1.5 h-1.5 rounded-full bg-purple-400/80 shrink-0" />
+                                <span class="mt-[6px] w-1.5 h-1.5 rounded-full bg-purple-400/80 shrink-0"></span>
                                 <span>{ach}</span>
                             </li>
                         {/each}
@@ -158,27 +161,28 @@
             {/each}
         </div>
 
-        <!-- EXPERIENCIA (DERECHA) -->
+        <!-- EXPERIENCIA -->
         <div class="space-y-10 relative">
-
             {#each experience as exp}
                 <article
+                    aria-label={`Experiencia: ${exp.title}`}
                     use:slideFrom={{ direction: "right", distance: 110, duration: 750 }}
                     class="relative group bg-[#0b1220]/90 border border-white/10 rounded-2xl
                            p-7 md:p-8 transform-gpu transition-all duration-500
                            hover:-translate-y-3 hover:rotate-1 hover:shadow-2xl hover:shadow-blue-900/40
                            hover:border-blue-500/60"
                 >
-                    <!-- Punto en la línea -->
+                    <!-- Punto -->
                     <div
                         class="hidden md:flex absolute -left-[38px] top-10 items-center justify-center"
+                        role="presentation"
                     >
                         <div class="w-4 h-4 rounded-full bg-slate-900 border border-blue-400 shadow-lg shadow-blue-500/60 relative">
-                            <div class="absolute inset-0 rounded-full border border-blue-400/60 animate-ping-slow" />
+                            <div class="absolute inset-0 rounded-full border border-blue-400/60 animate-ping-slow"></div>
                         </div>
                     </div>
 
-                    <!-- Header tarjeta -->
+                    <!-- Header -->
                     <header class="flex items-start md:items-center gap-3 mb-4">
                         <div
                             class="w-11 h-11 md:w-12 md:h-12 rounded-2xl bg-blue-500/10 border border-blue-400/40
@@ -198,12 +202,13 @@
                         </div>
                     </header>
 
-                    <!-- Meta info -->
+                    <!-- Meta -->
                     <div class="flex flex-wrap items-center gap-3 text-gray-400 text-xs md:text-sm mb-3">
                         <span class="inline-flex items-center gap-1.5 bg-white/5 px-3 py-1 rounded-full">
                             <MapPin size={14} class="text-blue-300" />
                             <span>{exp.location}</span>
                         </span>
+
                         <span class="inline-flex items-center gap-1.5 bg-white/5 px-3 py-1 rounded-full">
                             <CalendarRange size={14} class="text-blue-300" />
                             <span>{exp.date}</span>
@@ -215,14 +220,14 @@
                     </p>
 
                     <h3 class="text-sm font-semibold text-gray-100 mb-2 flex items-center gap-2">
-                        <span class="w-1.5 h-1.5 bg-blue-400 rounded-full" />
+                        <span class="w-1.5 h-1.5 bg-blue-400 rounded-full"></span>
                         Responsabilidades
                     </h3>
 
                     <ul class="text-gray-300 text-sm space-y-1.5">
                         {#each exp.tasks as task}
                             <li class="flex gap-2">
-                                <span class="mt-[6px] w-1.5 h-1.5 rounded-full bg-blue-400/80 shrink-0" />
+                                <span class="mt-[6px] w-1.5 h-1.5 rounded-full bg-blue-400/80 shrink-0"></span>
                                 <span>{task}</span>
                             </li>
                         {/each}
@@ -250,15 +255,9 @@
     }
 
     @keyframes timeline-flow {
-        0% {
-            transform: translateY(-100%);
-        }
-        50% {
-            transform: translateY(0%);
-        }
-        100% {
-            transform: translateY(100%);
-        }
+        0% { transform: translateY(-100%); }
+        50% { transform: translateY(0%); }
+        100% { transform: translateY(100%); }
     }
 
     .animate-ping-slow {
@@ -266,17 +265,8 @@
     }
 
     @keyframes ping-slow {
-        0% {
-            transform: scale(1);
-            opacity: 0.8;
-        }
-        80% {
-            transform: scale(1.7);
-            opacity: 0;
-        }
-        100% {
-            transform: scale(1.9);
-            opacity: 0;
-        }
+        0% { transform: scale(1); opacity: 0.8; }
+        80% { transform: scale(1.7); opacity: 0; }
+        100% { transform: scale(1.9); opacity: 0; }
     }
 </style>
