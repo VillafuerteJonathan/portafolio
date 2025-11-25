@@ -35,7 +35,7 @@
 			['Inicio', '/'],
 			['Sobre Mí', '#sobre-mi'],
 			['Proyectos', '#proyectos'],
-			['Certificados', '/certificados'],
+			['Certificados', '#certificados'],
 			['Estudios', '/estudios'],
 			['Contacto', '/contacto']
 		] as item}

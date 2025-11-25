@@ -1,5 +1,6 @@
 <script>
     import { PROJECTS } from "$lib/data/projects.js";
+     import { fadeInOnScroll } from "$lib/utils/fadeInOnScroll.js";
 
     let mouse = { x: 0, y: 0 };
     let currentIndex = 0;
@@ -7,6 +8,11 @@
     // Calcular cuántos grupos de 3 proyectos tenemos
     const itemsPerPage = 3;
     const totalPages = Math.ceil(PROJECTS.length / itemsPerPage);
+    
+    // Partículas de fondo
+    let particles = [];
+    let particlesInterval;
+
     
     // Obtener los proyectos actuales para mostrar
     $: currentProjects = PROJECTS.slice(currentIndex, currentIndex + itemsPerPage);
@@ -33,7 +39,23 @@
 
 <svelte:window on:mousemove={handleMove} />
 
-<section id="proyectos" class="pt-32 pb-28 px-6 md:px-16 text-white relative">
+<section id="proyectos" class="pt-4 pb-28 px-6 md:px-16 text-white relative">
+    <div use:fadeInOnScroll class="my-section">
+       <!-- ================= PARTICULAS ================= -->
+    <div class="absolute inset-0 pointer-events-none">
+        {#each particles as p}
+            <div
+                class="absolute rounded-full bg-purple-400"
+                style="
+                    left: {p.x}%;
+                    top: {p.y}%;
+                    width: {p.size}px;
+                    height: {p.size}px;
+                    opacity: {p.opacity};
+                "
+            />
+        {/each}
+    </div>
 
     <!-- =================== TÍTULO =================== -->
     <div class="text-center mb-20">
@@ -168,5 +190,6 @@
                 </svg>
             </button>
         </div>
+    </div>
     </div>
 </section>

@@ -1,12 +1,11 @@
 <script>
-    // Variables para Parallax
+    import { Github, Linkedin, Mail, MessageCircle } from "lucide-svelte";
+
+    // Parallax
     let mouseX = 0;
     let mouseY = 0;
 
-    // Hover para la imagen
     let imgHover = false;
-
-    // Hover para el texto principal
     let titleHover = false;
 
     function handleMouseMove(e) {
@@ -63,7 +62,8 @@
             <!-- BOTONES -->
             <div class="flex gap-4">
                 <a
-                    href="#"
+                    href="/assets/pdf/micv.pdf"
+                    download="CV_Jonathan_Villafuerte.pdf"
                     class="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-xl text-sm
                     font-semibold shadow-lg shadow-purple-600/20 transition flex items-center gap-2"
                 >
@@ -80,11 +80,53 @@
                 </a>
             </div>
 
-            <!-- ÍCONOS -->
+            <!-- ICONOS REDES -->
             <div class="flex gap-6 pt-4 text-2xl">
-                <a href="#" class="hover:text-purple-400 transition"><i class="ri-github-fill"></i></a>
-                <a href="#" class="hover:text-purple-400 transition"><i class="ri-linkedin-fill"></i></a>
-                <a href="#" class="hover:text-purple-400 transition"><i class="ri-mail-line"></i></a>
+
+                <a 
+                    href="hhttps://github.com/VillafuerteJonathan"
+                    target="_blank"
+                    class="p-2 rounded-xl bg-white/5 hover:bg-purple-600/30 transition-all border border-white/10"
+                >
+                    <Github size={26} class="text-gray-300 hover:text-purple-400 transition" />
+                </a>
+
+                <a 
+                    href="www.linkedin.com/in/eduardo-quispe-48a756381"
+                    target="_blank"
+                    class="p-2 rounded-xl bg-white/5 hover:bg-purple-600/30 transition-all border border-white/10"
+                >
+                    <Linkedin size={26} class="text-gray-300 hover:text-purple-400 transition" />
+                </a>
+
+                <a 
+                    href="https://discord.com/users/740763335343210556"
+                    target="_blank"
+                    class="p-2 rounded-xl bg-white/5 hover:bg-purple-600/30 transition-all border border-white/10"
+                >
+                    <svg 
+                        xmlns="http://www.w3.org/2000/svg" 
+                        width="26" 
+                        height="26" 
+                        viewBox="0 0 24 24" 
+                        fill="currentColor" 
+                        class="text-gray-300 hover:text-purple-400 transition"
+                    >
+                        <path d="M20.317 4.369a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.249a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.249.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.058a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.027c.462-.63.873-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.108 13.108 0 01-1.872-.892.077.077 0 01-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 01.077-.01c3.927 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.009c.12.099.246.198.372.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.893.076.076 0 00-.04.105c.36.698.771 1.364 1.225 1.994a.076.076 0 00.084.027 19.876 19.876 0 005.995-3.03.077.077 0 00.03-.056c.5-5.177-.838-9.673-3.548-13.662a.061.061 0 00-.031-.028zM8.02 15.33c-1.182 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.213 0 2.178 1.096 2.157 2.419 0 1.334-.955 2.419-2.157 2.419zm7.975 0c-1.182 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.213 0 2.178 1.096 2.157 2.419 0 1.334-.944 2.419-2.157 2.419z"/>
+                    </svg>
+                </a>
+
+
+               <a
+                    href="https://mail.google.com/mail/?view=cm&fs=1&to=eduardovillaquis2@gmail.com&su=Contacto%20desde%20tu%20portafolio&body=Hola,%20quiero%20ponerme%20en%20contacto..."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="p-2 rounded-xl bg-white/5 hover:bg-purple-600/30 transition-all border border-white/10"
+                >
+                    <Mail size={26} class="text-gray-300 hover:text-purple-400 transition" />
+                </a>
+
+
             </div>
         </div>
 
@@ -103,21 +145,17 @@
                 on:mouseenter={() => imgHover = true}
                 on:mouseleave={() => imgHover = false}
             >
-
-                <!-- Sombra -->
                 <div
                     class="absolute -bottom-12 left-1/2 -translate-x-1/2 w-[250px] h-[80px]
                            bg-purple-700 blur-3xl opacity-40 rounded-full"
                 ></div>
 
-                <!-- Marco + cambio de imagen -->
                 <div
                     class="relative w-[320px] h-[320px] rounded-full overflow-hidden border-[6px]
                            border-purple-500 shadow-[0_0_40px_rgba(168,85,247,0.5)]
                            transition-all duration-300 group-hover:scale-[1.07]
                            group-hover:shadow-[0_0_60px_rgba(168,85,247,0.8)]"
                 >
-                    <!-- Imagen principal -->
                     <img
                         src="/img/profile.jpg"
                         alt="Foto de Jonathan"
@@ -125,7 +163,6 @@
                         style="opacity: {imgHover ? 0 : 1};"
                     />
 
-                    <!-- Avatar al hacer hover -->
                     <img
                         src="/img/avatar.png"
                         alt="Avatar"
@@ -138,7 +175,7 @@
 
     </div>
 
-    <!-- INDICADOR DE SCROLL (tu imagen del mouse) -->
+    <!-- INDICADOR DE SCROLL -->
     <div class="flex justify-center mt-5">
         <div class="w-10 h-16 border-2 border-purple-400 rounded-3xl flex justify-center items-start p-2">
             <div class="w-2 h-3 bg-purple-400 rounded-full animate-bounce"></div>
