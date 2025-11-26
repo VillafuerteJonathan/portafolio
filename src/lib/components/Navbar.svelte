@@ -34,7 +34,7 @@
 			['Sobre Mí', '#sobre-mi'],
 			['Proyectos', '#proyectos'],
 			['Certificados', '#certificados'],
-			['Estudios', '/estudios'],
+			['Estudios', '#estudios'],
 			['Contacto', '#contacto']
 		] as item}
 			<li>
@@ -74,7 +74,7 @@
 			['Sobre Mí', '#sobre-mi'],
 			['Proyectos', '#proyectos'],
 			['Certificados', '#certificados'],
-			['Estudios', '/estudios'],
+			['Estudios', '#estudios'],
 			['Contacto', '#contacto']
 		] as item}
 			<a class="hover:text-purple-300 transition" href={item[1]} on:click={() => isOpen = false}>

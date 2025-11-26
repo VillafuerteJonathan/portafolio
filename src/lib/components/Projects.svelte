@@ -37,7 +37,7 @@
 <section 
     id="proyectos"
     aria-label="Sección de proyectos"
-    class="pt-4 pb-28 px-6 md:px-16 text-white relative"
+    class="pt-18 pb-2 px-6 md:px-16 text-white relative"
 >
     <div use:fadeInOnScroll class="my-section">
 

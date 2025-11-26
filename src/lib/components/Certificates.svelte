@@ -56,7 +56,7 @@
     }
 </script>
 
-<section id="certificados" class="pt-2 pb-8 px-6 md:px-66 text-white relative">
+<section id="certificados" class="pt-18 pb-8 px-6 md:px-66 text-white relative">
 
     <div class="text-center mb-8">
         <h1 class="text-5xl font-extrabold">

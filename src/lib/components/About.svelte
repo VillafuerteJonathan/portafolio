@@ -21,8 +21,11 @@
     let particles = [];
     let particlesInterval;
 
+    // ==== FIX PARALLAX ====
+    $: parallaxLeft = `transform: translateX(${mousePosition.x * 0.15}px) translateY(${mousePosition.y * 0.15}px)`;
+    $: parallaxRight = `transform: translateX(${mousePosition.x * -0.12}px) translateY(${mousePosition.y * -0.12}px)`;
+
     onMount(() => {
-        // Parallax seguro en SSR
         window.addEventListener("mousemove", handleMouseMove);
 
         initParticles();
@@ -73,6 +76,7 @@
 
     function closeModal() {
         modalOpen = false;
+        selectedCategory = null;
     }
 
     function handleMouseMove(e) {
@@ -80,6 +84,20 @@
             x: (e.clientX / window.innerWidth - 0.5) * 15,
             y: (e.clientY / window.innerHeight - 0.5) * 15
         };
+    }
+
+    // ====== GET ITEMS/TITLES ======
+    function getModalItems() {
+        if (!selectedCategory) return [];
+        return TECH[selectedCategory].map(tech => ({
+            name: tech.name,
+            icon: tech.icon
+        }));
+    }
+
+    function getModalTitle() {
+        if (!selectedCategory) return '';
+        return skillCategories.find(c => c.key === selectedCategory)?.name || 'Tecnologías';
     }
 
     const skillCategories = [
@@ -93,15 +111,8 @@
 
 <section
     id="sobre-mi"
-    class="pt-28 pb-24 px-6 md:px-20 text-white relative overflow-hidden"
-    aria-label="Sección Sobre Mí"
+    class="pt-28 pb-2x px-6 md:px-20 text-white relative overflow-hidden"
 >
-    <!-- Background Glow -->
-    <div class="pointer-events-none absolute inset-0 opacity-40">
-        <div class="absolute -top-40 left-10 w-72 h-72 bg-purple-700/30 blur-[90px] rounded-full"></div>
-        <div class="absolute bottom-0 right-10 w-80 h-80 bg-blue-500/25 blur-[95px] rounded-full"></div>
-    </div>
-
     <!-- Partículas -->
     <div class="absolute inset-0 pointer-events-none z-0">
         {#each particles as p}
@@ -118,7 +129,6 @@
         {/each}
     </div>
 
-    <!-- TÍTULO -->
     <div class="text-center mb-16 relative z-10">
         <h1 bind:this={titleRef} class="text-5xl font-extrabold mb-5 text-white">
             {#each "Acerca de Mí".split("") as letter}
@@ -133,7 +143,7 @@
         </p>
     </div>
 
-    <!-- GRID -->
+
     <div class="grid grid-cols-1 md:grid-cols-2 gap-10 relative z-10">
 
         <!-- SOBRE MÍ -->
@@ -141,10 +151,8 @@
             use:slideFrom={{ direction: "left", distance: 140, duration: 800 }}
             class="relative bg-[#0b1220]/90 rounded-2xl p-8 border border-white/10 shadow-xl
                    group transition-all duration-500 hover:-translate-y-3 hover:shadow-purple-900/40"
-            style={`transform: translateX(${mousePosition.x * 0.15}px) translateY(${mousePosition.y * 0.15}px);`}
+            style={parallaxLeft}
         >
-            <div class="absolute inset-0 opacity-0 group-hover:opacity-40 bg-gradient-to-r from-purple-600/30 to-blue-600/20 blur-2xl transition"></div>
-
             <div class="relative z-10">
                 <h2 class="text-3xl font-bold mb-4 flex items-center gap-3">
                     <UserRound size={38} class="text-purple-400" />
@@ -195,16 +203,6 @@
                         </li>
                     </ul>
                 </div>
-
-                <!-- Botón contacto -->
-                <a
-                    href="#contacto"
-                    aria-label="Ir a la sección de contacto"
-                    class="mt-8 inline-flex items-center gap-3 bg-purple-600 hover:bg-purple-700 
-                           px-6 py-3 rounded-xl font-semibold shadow-lg transition relative overflow-hidden"
-                >
-                    <span class="relative z-10">📩 Contáctame</span>
-                </a>
             </div>
         </article>
 
@@ -213,10 +211,8 @@
             use:slideFrom={{ direction: "right", distance: 140, duration: 800 }}
             class="relative bg-[#0b1220]/90 rounded-2xl p-8 border border-white/10 shadow-xl 
                    group transition-all duration-500 hover:-translate-y-3 hover:shadow-blue-900/40"
-            style={`transform: translateX(${mousePosition.x * -0.12}px) translateY(${mousePosition.y * -0.12}px);`}
+            style={parallaxRight}
         >
-            <div class="absolute inset-0 opacity-0 group-hover:opacity-40 bg-gradient-to-r from-blue-600/30 to-purple-600/30 blur-2xl transition"></div>
-
             <div class="relative z-10">
                 <h2 class="text-3xl font-bold mb-4 flex items-center gap-3">
                     <Sparkles size={36} class="text-purple-400" />
@@ -232,10 +228,9 @@
                             class="relative bg-[#111a2d] p-5 rounded-xl border border-white/10 group/card
                                    hover:-translate-y-2 hover:shadow-xl hover:shadow-purple-700/30 transition-all"
                             on:click={() => openModal(c.key)}
-                            aria-label={"Mostrar tecnologías de " + c.name}
                         >
                             <div class="relative flex items-center gap-4">
-                                <div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/40 flex items-center justify-center transition group-hover/card:scale-110 group-hover/card:-rotate-6">
+                                <div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/40 flex items-center justify-center transition">
                                     <svelte:component this={c.icon} size={22} class={c.accent}/>
                                 </div>
 
@@ -244,9 +239,6 @@
                                     <p class="text-gray-400 text-xs mt-1">{TECH[c.key].length} tecnologías</p>
                                 </div>
                             </div>
-
-                            <div class="mt-3 h-[2px] w-full bg-gradient-to-r from-transparent via-purple-500/70 to-transparent 
-                                        scale-x-0 group-hover/card:scale-x-100 transition-transform duration-300"></div>
                         </button>
                     {/each}
                 </div>
@@ -255,8 +247,13 @@
     </div>
 </section>
 
-{#if modalOpen}
-    <TechModal category={selectedCategory} tech={TECH[selectedCategory]} on:close={closeModal} />
+{#if modalOpen && selectedCategory}
+    <TechModal 
+        open={modalOpen}
+        title={getModalTitle()}
+        items={getModalItems()}
+        on:close={closeModal}
+    />
 {/if}
 
 <style>

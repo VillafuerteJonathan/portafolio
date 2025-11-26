@@ -41,7 +41,7 @@
 </script>
 
 <section
-    id="educacion"
+    id="estudios"
     aria-label="Sección de educación y experiencia"
     class="pt-18 pb-24 px-6 md:px-20 text-white relative overflow-hidden"
 >
