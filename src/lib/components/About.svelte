@@ -111,8 +111,15 @@
 
 <section
     id="sobre-mi"
-    class="pt-28 pb-2x px-6 md:px-20 text-white relative overflow-hidden"
+    aria-label="Sección sobre mí y habilidades"
+    class="pt-28 pb-24 px-6 md:px-20 text-white relative overflow-hidden"
 >
+    <!-- Glow de fondo similar a estudios -->
+    <div class="pointer-events-none absolute inset-0 opacity-20">
+        <div class="absolute -top-40 left-10 w-72 h-72 bg-purple-700/30 blur-[90px] rounded-full"></div>
+        <div class="absolute bottom-0 right-10 w-80 h-80 bg-blue-500/25 blur-[95px] rounded-full"></div>
+    </div>
+
     <!-- Partículas -->
     <div class="absolute inset-0 pointer-events-none z-0">
         {#each particles as p}
@@ -129,8 +136,19 @@
         {/each}
     </div>
 
-    <div class="text-center mb-16 relative z-10">
-        <h1 bind:this={titleRef} class="text-5xl font-extrabold mb-5 text-white">
+    <!-- TÍTULO CON EFECTO DE SCROLL -->
+    <div
+        class="text-center mb-16 relative z-10"
+        use:slideFrom={{ direction: "bottom", distance: 80, duration: 700 }}
+    >
+        <div class="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-white/5 border border-white/10 mb-4 backdrop-blur">
+            <UserRound size={20} class="text-purple-400" />
+            <span class="text-xs uppercase tracking-[0.2em] text-gray-300">
+                Conóceme
+            </span>
+        </div>
+
+        <h1 bind:this={titleRef} class="text-4xl md:text-5xl font-extrabold mb-3 text-white">
             {#each "Acerca de Mí".split("") as letter}
                 <span class="letter inline-block animate-typing">
                     {letter === " " ? "\u00A0" : letter}
@@ -138,68 +156,91 @@
             {/each}
         </h1>
 
-        <p class="text-gray-300 text-lg max-w-2xl mx-auto animate-fade-in-up">
+        <p class="text-gray-300 max-w-2xl mx-auto text-sm md:text-base animate-fade-in-up">
             Te cuento quién soy, cómo trabajo y qué tecnologías domino como desarrollador Full Stack.
         </p>
     </div>
 
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 relative z-10">
+    <!-- CONTENIDO PRINCIPAL CON EFECTOS DE SCROLL -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 relative z-10 max-w-6xl mx-auto">
 
         <!-- SOBRE MÍ -->
         <article
-            use:slideFrom={{ direction: "left", distance: 140, duration: 800 }}
-            class="relative bg-[#0b1220]/90 rounded-2xl p-8 border border-white/10 shadow-xl
-                   group transition-all duration-500 hover:-translate-y-3 hover:shadow-purple-900/40"
+            aria-label="Información personal y pasatiempos"
+            use:slideFrom={{ direction: "left", distance: 110, duration: 750 }}
+            class="relative bg-[#0b1220]/90 border border-white/10 rounded-2xl
+                   p-7 md:p-8 transform-gpu transition-all duration-500
+                   hover:-translate-y-3 hover:-rotate-1 hover:shadow-2xl hover:shadow-purple-900/40
+                   hover:border-purple-500/60 group"
             style={parallaxLeft}
         >
             <div class="relative z-10">
-                <h2 class="text-3xl font-bold mb-4 flex items-center gap-3">
-                    <UserRound size={38} class="text-purple-400" />
-                    Sobre Mí
-                </h2>
+                <header class="flex items-start md:items-center gap-3 mb-6">
+                    <div
+                        class="w-11 h-11 md:w-12 md:h-12 rounded-2xl bg-purple-500/10 border border-purple-400/40
+                               flex items-center justify-center shadow-lg shadow-purple-900/40
+                               transform-gpu transition-all duration-300 group-hover:-translate-y-1 group-hover:scale-110"
+                    >
+                        <UserRound size={24} class="text-purple-300" />
+                    </div>
 
-                <p class="text-gray-300 leading-relaxed mb-4">
-                    Soy <span class="text-purple-400 font-semibold">Jonathan Villafuerte</span>,
-                    un <b>Ingeniero de Software Full Stack</b> apasionado por construir soluciones modernas que realmente funcionan.
-                </p>
+                    <div>
+                        <h2 class="text-xl md:text-2xl font-bold text-purple-200">
+                            Sobre Mí
+                        </h2>
+                        <p class="text-gray-300 font-medium text-sm md:text-base">
+                            Ingeniero de Software Full Stack
+                        </p>
+                    </div>
+                </header>
 
-                <ul class="mt-2 text-gray-300 space-y-2 leading-relaxed">
-                    <li class="flex items-start gap-3">
-                        <HeartHandshake class="text-purple-300" size={18}/> Trabajo en equipo con buena vibra
-                    </li>
-                    <li class="flex items-start gap-3">
-                        <Code2 class="text-purple-300" size={18}/> Soluciono problemas incluso cuando se complica
-                    </li>
-                    <li class="flex items-start gap-3">
-                        <Cpu class="text-purple-300" size={18}/> Desarrollo sistemas rápidos y robustos
-                    </li>
-                    <li class="flex items-start gap-3">
-                        <Sparkles class="text-purple-300" size={18}/> Me encantan los retos tecnológicos
-                    </li>
-                </ul>
+                <div class="space-y-4">
+                    <p class="text-gray-300 text-sm md:text-[15px] leading-relaxed">
+                        Soy <span class="text-purple-400 font-semibold">Jonathan Villafuerte</span>,
+                        un apasionado por construir soluciones modernas que realmente funcionan.
+                    </p>
+
+                    <ul class="text-gray-300 text-sm space-y-2.5">
+                        <li class="flex items-start gap-3">
+                            <HeartHandshake class="text-purple-300 mt-0.5" size={18}/>
+                            <span>Trabajo en equipo con buena vibra</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <Code2 class="text-purple-300 mt-0.5" size={18}/>
+                            <span>Soluciono problemas incluso cuando se complica</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <Cpu class="text-purple-300 mt-0.5" size={18}/>
+                            <span>Desarrollo sistemas rápidos y robustos</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <Sparkles class="text-purple-300 mt-0.5" size={18}/>
+                            <span>Me encantan los retos tecnológicos</span>
+                        </li>
+                    </ul>
+                </div>
 
                 <!-- PASATIEMPOS -->
-                <div class="mt-8">
-                    <h3 class="text-xl font-semibold mb-3 flex items-center gap-2">
+                <div class="mt-8 pt-6 border-t border-white/10">
+                    <h3 class="text-lg font-semibold mb-4 flex items-center gap-2 text-gray-100">
                         <Sparkles size={20} class="text-yellow-300" />
                         Pasatiempos
                     </h3>
 
-                    <ul class="space-y-3 text-gray-300">
-                        <li class="flex items-center gap-3">
+                    <ul class="space-y-3 text-gray-300 text-sm">
+                        <li class="flex items-center gap-3 bg-white/5 p-3 rounded-xl border border-white/5">
                             <span class="w-10 h-10 flex items-center justify-center rounded-xl bg-purple-500/10 border border-purple-500/30">⚽</span>
-                            Fútbol — Me encantan los partidos y más si son con amigos.
+                            <span>Fútbol — Me encantan los partidos y más si son con amigos.</span>
                         </li>
 
-                        <li class="flex items-center gap-3">
+                        <li class="flex items-center gap-3 bg-white/5 p-3 rounded-xl border border-white/5">
                             <span class="w-10 h-10 flex items-center justify-center rounded-xl bg-purple-500/10 border border-purple-500/30">🎮</span>
-                            Videojuegos — Me apasionan los juegos de terror y aventura.
+                            <span>Videojuegos — Me apasionan los juegos de terror y aventura.</span>
                         </li>
 
-                        <li class="flex items-center gap-3">
+                        <li class="flex items-center gap-3 bg-white/5 p-3 rounded-xl border border-white/5">
                             <span class="w-10 h-10 flex items-center justify-center rounded-xl bg-purple-500/10 border border-purple-500/30">🎬</span>
-                            Cine — Si la historia me atrapa, la termino sí o sí.
+                            <span>Cine — Si la historia me atrapa, la termino sí o sí.</span>
                         </li>
                     </ul>
                 </div>
@@ -208,34 +249,54 @@
 
         <!-- HABILIDADES -->
         <article
-            use:slideFrom={{ direction: "right", distance: 140, duration: 800 }}
-            class="relative bg-[#0b1220]/90 rounded-2xl p-8 border border-white/10 shadow-xl 
-                   group transition-all duration-500 hover:-translate-y-3 hover:shadow-blue-900/40"
+            aria-label="Habilidades técnicas por categorías"
+            use:slideFrom={{ direction: "right", distance: 110, duration: 750 }}
+            class="relative bg-[#0b1220]/90 border border-white/10 rounded-2xl
+                   p-7 md:p-8 transform-gpu transition-all duration-500
+                   hover:-translate-y-3 hover:rotate-1 hover:shadow-2xl hover:shadow-blue-900/40
+                   hover:border-blue-500/60 group"
             style={parallaxRight}
         >
             <div class="relative z-10">
-                <h2 class="text-3xl font-bold mb-4 flex items-center gap-3">
-                    <Sparkles size={36} class="text-purple-400" />
-                    Habilidades Técnicas
-                </h2>
+                <header class="flex items-start md:items-center gap-3 mb-6">
+                    <div
+                        class="w-11 h-11 md:w-12 md:h-12 rounded-2xl bg-blue-500/10 border border-blue-400/40
+                               flex items-center justify-center shadow-lg shadow-blue-900/40
+                               transform-gpu transition-all duration-300 group-hover:-translate-y-1 group-hover:scale-110"
+                    >
+                        <Sparkles size={24} class="text-blue-300" />
+                    </div>
 
-                <p class="text-gray-400 mb-4">Haz clic en una categoría para ver las tecnologías:</p>
+                    <div>
+                        <h2 class="text-xl md:text-2xl font-bold text-blue-200">
+                            Habilidades Técnicas
+                        </h2>
+                        <p class="text-gray-300 font-medium text-sm md:text-base">
+                            Tecnologías que domino
+                        </p>
+                    </div>
+                </header>
+
+                <p class="text-gray-400 text-sm mb-6">Haz clic en una categoría para ver las tecnologías:</p>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {#each skillCategories as c}
                         <button
                             type="button"
+                            aria-label={`Ver tecnologías de ${c.name}`}
                             class="relative bg-[#111a2d] p-5 rounded-xl border border-white/10 group/card
-                                   hover:-translate-y-2 hover:shadow-xl hover:shadow-purple-700/30 transition-all"
+                                   hover:-translate-y-2 hover:shadow-xl hover:shadow-purple-700/30 
+                                   transition-all duration-300 transform-gpu hover:border-purple-500/40"
                             on:click={() => openModal(c.key)}
                         >
                             <div class="relative flex items-center gap-4">
-                                <div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/40 flex items-center justify-center transition">
+                                <div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/40 
+                                           flex items-center justify-center transition group-hover/card:scale-110">
                                     <svelte:component this={c.icon} size={22} class={c.accent}/>
                                 </div>
 
                                 <div class="flex-1 text-left">
-                                    <p class="font-semibold">{c.name}</p>
+                                    <p class="font-semibold text-gray-100">{c.name}</p>
                                     <p class="text-gray-400 text-xs mt-1">{TECH[c.key].length} tecnologías</p>
                                 </div>
                             </div>

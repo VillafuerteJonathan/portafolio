@@ -21,7 +21,7 @@
 		class="text-2xl font-bold tracking-tight select-none text-white relative group"
 		aria-label="Ir al inicio"
 	>
-		<span class="group-hover:text-purple-400 transition">JV</span>
+		<span class="group-hover:text-purple-400 transition">Portafolio</span>
 
 		<!-- Glow -->
 		<div class="absolute inset-0 blur-xl opacity-0 group-hover:opacity-40 transition bg-purple-500 rounded-full"></div>

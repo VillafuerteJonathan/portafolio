@@ -85,7 +85,7 @@
                         <img
                             src={c.image}
                             alt={c.title}
-                            class="rounded-xl w-[70%] max-h-[200px] object-contain group-hover:opacity-80 transition"
+                            class="rounded-xl w-[70%] max-h-[220px] object-contain group-hover:opacity-80 transition"
                         />
                     </div>
 
