@@ -1,33 +1,8 @@
 <script>
     import { PROJECTS } from "$lib/data/projects.js";
     import { fadeInOnScroll } from "$lib/utils/fadeInOnScroll.js";
-    import { onMount } from "svelte";
 
     let mouse = { x: 0, y: 0 };
-    let currentIndex = 0;
-    let itemsPerPage = 3;
-
-    // Detectar breakpoints dinámicos
-    function updateItemsPerPage() {
-        const w = window.innerWidth;
-
-        if (w < 640) {
-            itemsPerPage = 1;
-        } else if (w < 1024) {
-            itemsPerPage = 2;
-        } else {
-            itemsPerPage = 3;
-        }
-    }
-
-    onMount(() => {
-        updateItemsPerPage();
-        window.addEventListener("resize", updateItemsPerPage);
-        return () => window.removeEventListener("resize", updateItemsPerPage);
-    });
-
-    $: totalPages = Math.ceil(PROJECTS.length / itemsPerPage);
-    $: currentProjects = PROJECTS.slice(currentIndex, currentIndex + itemsPerPage);
 
     function handleMouse(e) {
         mouse = {
@@ -35,22 +10,18 @@
             y: (e.clientY / window.innerHeight - 0.5) * 8
         };
     }
-
-    function nextSlide() {
-        currentIndex = (currentIndex + itemsPerPage) % PROJECTS.length;
-    }
-
-    function prevSlide() {
-        currentIndex =
-            (currentIndex - itemsPerPage + PROJECTS.length) % PROJECTS.length;
-    }
-
-    function goToSlide(i) {
-        currentIndex = i * itemsPerPage;
-    }
 </script>
 
 <svelte:window on:mousemove={handleMouse} />
+
+<svelte:head>
+    {#each PROJECTS as p}
+        <link rel="preload" as="image" href={p.img} />
+        {#if p.video}
+            <link rel="preload" as="video" href={p.video} />
+        {/if}
+    {/each}
+</svelte:head>
 
 <section
     id="proyectos"
@@ -70,22 +41,24 @@
             </p>
         </div>
 
-        <!-- GRID DE PROYECTOS -->
+        <!-- TODAS LAS TARJETAS -->
         <div class="max-w-7xl mx-auto">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-14 gap-x-12">
 
-                {#each currentProjects as p}
+                {#each PROJECTS as p}
                     <article
-                        aria-label={`Proyecto: ${p.title}`}
-                        class="group bg-[#141c2f] border border-white/10 rounded-xl overflow-hidden shadow-lg
+                        class="card group bg-[#141c2f] border border-white/10 rounded-xl overflow-hidden shadow-lg
                                transition-all duration-500 relative h-full flex flex-col"
-                        style="transform: perspective(900px)
-                               rotateX({mouse.y * 0.3}deg)
-                               rotateY({mouse.x * 0.3}deg);"
+                        style="
+                            transform:
+                                perspective(900px)
+                                rotateX({mouse.y * 0.15}deg)
+                                rotateY({mouse.x * 0.15}deg);
+                        "
                     >
-                        <!-- Glow hover -->
-                        <div class="absolute inset-0 bg-gradient-to-r from-purple-600/10 to-blue-500/10 
-                                    opacity-0 group-hover:opacity-40 blur-xl transition pointer-events-none">
+                        <!-- Glow -->
+                        <div class="glow absolute inset-0 bg-gradient-to-r from-purple-600/10 to-blue-500/10 
+                                    opacity-0 group-hover:opacity-40 blur-xl transition duration-500 pointer-events-none">
                         </div>
 
                         <!-- IMAGEN -->
@@ -94,8 +67,8 @@
                                 src={p.img}
                                 alt={p.title}
                                 loading="lazy"
-                                class="absolute inset-0 w-full h-full object-cover 
-                                       transition-opacity duration-500 group-hover:opacity-0"
+                                class="img absolute inset-0 w-full h-full object-cover 
+                                       transition-all duration-500 group-hover:scale-110 group-hover:opacity-80"
                             />
 
                             {#if p.video}
@@ -139,7 +112,7 @@
                                     rel="noopener noreferrer"
                                     class="flex items-center justify-center gap-2 px-4 py-2 rounded-lg
                                            bg-black/40 hover:bg-black/60 border border-white/10
-                                           transition w-full text-sm hover:scale-[1.03]"
+                                           transition w-full text-sm hover:scale-[1.05]"
                                 >
                                     <img src="/assets/icons/github.svg" class="w-5 opacity-80" />
                                     Código
@@ -152,7 +125,7 @@
                                         rel="noopener noreferrer"
                                         class="flex items-center justify-center gap-2 px-4 py-2 rounded-lg
                                                bg-purple-600/80 hover:bg-purple-600 border border-purple-400/30
-                                               transition w-full text-sm hover:scale-[1.03]"
+                                               transition w-full text-sm hover:scale-[1.05]"
                                     >
                                         Demo
                                     </a>
@@ -163,51 +136,30 @@
                 {/each}
 
             </div>
-
-            <!-- CONTROLES -->
-            <div class="flex justify-center items-center gap-6 mt-12">
-
-                <button
-                    on:click={prevSlide}
-                    class="p-3 rounded-full bg-[#1e2a3f] hover:bg-purple-900/30 border border-white/10 
-                           transition hover:scale-110 active:scale-95"
-                >
-                    <svg width="26" height="26" stroke="currentColor" fill="none">
-                        <path d="M15 19l-7-7 7-7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </button>
-
-                <!-- Indicadores -->
-                <div class="flex gap-3">
-                    {#each Array(totalPages) as _, i}
-                        <button
-                            on:click={() => goToSlide(i)}
-                            class={`w-3 h-3 rounded-full transition-all duration-300 ${
-                                Math.floor(currentIndex / itemsPerPage) === i
-                                    ? 'bg-purple-500 scale-125 shadow-purple-500 shadow'
-                                    : 'bg-white/30 hover:bg-white/50'
-                            }`}
-                        >
-                        </button>
-                    {/each}
-                </div>
-
-                <button
-                    on:click={nextSlide}
-                    class="p-3 rounded-full bg-[#1e2a3f] hover:bg-purple-900/30 border border-white/10 
-                           transition hover:scale-110 active:scale-95"
-                >
-                    <svg width="26" height="26" stroke="currentColor" fill="none">
-                        <path d="M9 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </button>
-
-            </div>
-
         </div>
     </div>
 </section>
 
 <style>
-    @keyframes float { 0% { transform: translateY(0);} 50% { transform: translateY(-8px);} 100% { transform: translateY(0);}}
+    /* Tarjeta flotando */
+    .card:hover {
+        transform: translateY(-10px) scale(1.03);
+        box-shadow: 0 0 35px rgba(168, 85, 247, 0.5);
+        border-color: rgba(168, 85, 247, 0.4);
+    }
+
+    /* Imagen zoom suave */
+    .img {
+        transform: scale(1);
+    }
+    .card:hover .img {
+        transform: scale(1.12);
+        opacity: 0.85;
+    }
+
+    /* Glow extra */
+    .card:hover .glow {
+        filter: blur(28px);
+        opacity: 0.55;
+    }
 </style>
