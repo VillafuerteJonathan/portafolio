@@ -2,21 +2,25 @@
     import { Github, Linkedin, Mail } from "lucide-svelte";
 </script>
 
-<footer class="mt-1 py-16 px-6 md:px-20 text-gray-300 bg-gradient-to-b from-[#0b0f19] to-[#05060c]">
+<footer 
+    class="w-full overflow-hidden py-10 px-6 md:px-20 text-gray-300 bg-gradient-to-b from-[#0b0f19] to-[#05060c]"
+>
 
     <!-- NOMBRE -->
-    <div class="text-center mb-10">
-        <h2 class="text-4xl font-extrabold tracking-widest text-purple-400">JV</h2>
+    <div class="text-center mb-8">
+        <h2 class="text-3xl md:text-4xl font-extrabold tracking-widest text-purple-400">
+            JV
+        </h2>
     </div>
 
     <!-- ICONOS -->
-    <div class="flex justify-center gap-6 mb-10">
+    <div class="flex justify-center gap-4 md:gap-6 mb-8">
         <a 
             href="https://github.com/VillafuerteJonathan"
             target="_blank"
             class="footer-icon"
         >
-            <Github size={26} />
+            <Github class="size-6 md:size-7" />
         </a>
 
         <a 
@@ -24,19 +28,19 @@
             target="_blank"
             class="footer-icon"
         >
-            <Linkedin size={26} />
+            <Linkedin class="size-6 md:size-7" />
         </a>
 
         <a 
-            href="https://mail.google.com/mail/?view=cm&fs=1&to=eduardovillaquis2@gmail.com&su=Contacto%20desde%20tu%20portafolio&body=Hola%20Eduardo,%0D%0A%0D%0A"
+            href="mailto:eduardovillaquis2@gmail.com"
             class="footer-icon"
         >
-            <Mail size={26} />
+            <Mail class="size-6 md:size-7" />
         </a>
     </div>
 
     <!-- MENÚ -->
-    <nav class="flex justify-center gap-8 text-sm opacity-90 mb-10">
+    <nav class="flex flex-wrap justify-center gap-4 md:gap-8 text-sm opacity-90 mb-8">
         <a href="/" class="footer-link">Inicio</a>
         <a href="#sobre-mi" class="footer-link">Sobre Mí</a>
         <a href="#proyectos" class="footer-link">Proyectos</a>
@@ -44,10 +48,10 @@
         <a href="#contacto" class="footer-link">Contacto</a>
     </nav>
 
-    <!-- LEMA PERSONAL -->
-    <p class="text-center text-gray-400 max-w-2xl mx-auto text-sm md:text-base italic mb-8">
-        “Me encanta aprender, mejorar y programar hasta que las cosas salgan como quiero…  
-        o hasta conseguir lo que quiero.” 
+    <!-- LEMA -->
+    <p class="text-center text-gray-400 max-w-xl mx-auto text-sm md:text-base italic mb-6">
+        “Me encanta aprender, mejorar y programar hasta que las cosas salgan como quiero…
+        o hasta conseguir lo que quiero.”
     </p>
 
     <!-- COPYRIGHT -->
@@ -60,7 +64,7 @@
 
 <style>
     .footer-icon {
-        padding: 12px;
+        padding: 10px;
         border-radius: 14px;
         background: rgba(255, 255, 255, 0.05);
         border: 1px solid rgba(255, 255, 255, 0.1);
@@ -80,6 +84,7 @@
     .footer-link {
         color: #aaa;
         transition: 0.3s;
+        white-space: nowrap;
     }
 
     .footer-link:hover {
