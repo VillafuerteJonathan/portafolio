@@ -22,7 +22,7 @@ export const PROJECTS = [
      {
         id: 3,
         title: "Portafolio Personal",
-        desc: "Portafolio desarrollado con un nuevo lenguajepor el desarrollador para mostrar habilidades, experiencia y proyectos.",
+        desc: "Portafolio desarrollado con un nuevo lenguaje por el desarrollador para mostrar habilidades, experiencia y proyectos.",
         img: "/assets/images/Portafolio.png",
         tech: ["Svelte", "Vite", "Tailwind", "TypeScript"],
         code: "https://github.com/OscarJRM/financial-simulator-app",

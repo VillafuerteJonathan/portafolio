@@ -61,16 +61,17 @@
 
             <!-- BOTONES -->
             <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                <a
+              <a
                     href="/assets/pdf/micv.pdf"
-                    download="CV_Jonathan_Villafuerte.pdf"
-                    aria-label="Descargar currículum"
+                    target="_blank"
+                    aria-label="Ver currículum"
                     class="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-xl text-sm
-                           font-semibold shadow-lg shadow-purple-600/20 transition flex items-center gap-2 justify-center"
+                        font-semibold shadow-lg shadow-purple-600/20 transition flex items-center gap-2 justify-center"
                 >
                     <i class="ri-download-line text-lg"></i>
                     Descargar CV
                 </a>
+
 
                 <a
                     href="#contacto"
@@ -125,13 +126,15 @@
                     </svg>
                 </a>
 
-                <a
-                    href="mailto:eduardovillaquis2@gmail.com"
+              <a
+                    href="https://mail.google.com/mail/?view=cm&fs=1&to=eduardovillaquis2@gmail.com&su=Contacto%20desde%20tu%20portafolio&body=Hola%20Eduardo,%0D%0A%0D%0A"
+                    target="_blank"
                     aria-label="Correo"
                     class="p-2 rounded-xl bg-white/5 hover:bg-purple-600/30 transition-all border border-white/10"
                 >
                     <Mail size={26} class="text-gray-300 hover:text-purple-400 transition" />
                 </a>
+
 
             </div>
         </div>
@@ -181,7 +184,7 @@
     </div>
 
     <!-- SCROLL -->
-    <div class="flex justify-center mt-6">
+    <div class="flex justify-center mt-0">
         <div class="w-9 h-14 border-2 border-purple-400 rounded-3xl flex justify-center items-start p-2">
             <div class="w-2 h-3 bg-purple-400 rounded-full animate-bounce"></div>
         </div>

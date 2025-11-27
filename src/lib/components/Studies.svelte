@@ -13,12 +13,12 @@
             title: "Ingeniería en Software",
             institution: "Universidad Técnica de Ambato",
             location: "Ambato, Ecuador",
-            date: "2019 - 2024",
+            date: "2020 - 2026",
             desc: "Formación sólida en desarrollo de software, arquitectura de sistemas, bases de datos, metodologías ágiles y buenas prácticas de ingeniería.",
             achievements: [
-                "Proyecto de titulación con calificación sobresaliente",
-                "Participación en hackatones y proyectos colaborativos",
-                "Apoyo en iniciativas de investigación tecnológica"
+                "Proyecto de titulación con tecnologia innovadora",
+                "Participación en conferencias y cursos prácticos",
+                "Entusiasmo por el aprendizaje continuo y la mejora de habilidades"
             ]
         }
     ];
@@ -31,10 +31,11 @@
             date: "2022 - Actualidad",
             desc: "Diseño y desarrollo de aplicaciones web modernas, APIs REST, integración con servicios externos y despliegues en entornos productivos.",
             tasks: [
-                "Construcción de interfaces con Vue, React y Svelte",
-                "Modelado de datos y consultas optimizadas en PostgreSQL",
-                "Implementación de APIs REST con Spring Boot",
-                "Uso de Git, Docker y flujos CI/CD para despliegues"
+                "Construcción de interfaces con React",
+                "Modelado de datos y consultas optimizadas",
+                "Implementación de APIs REST",
+                "Uso de Git, Docker y flujos CI/CD para despliegues",
+                "Desarrollo de soluciones personalizadas para clientes variados"
             ]
         }
     ];
@@ -145,7 +146,7 @@
                     </p>
 
                     <h3 class="text-sm font-semibold text-gray-100 mb-2 flex items-center gap-2">
-                        <span class="w-1.5 h-1.5 bg-purple-400 rounded-full"></span>
+                        
                         Logros destacados
                     </h3>
 
@@ -220,7 +221,7 @@
                     </p>
 
                     <h3 class="text-sm font-semibold text-gray-100 mb-2 flex items-center gap-2">
-                        <span class="w-1.5 h-1.5 bg-blue-400 rounded-full"></span>
+                       
                         Responsabilidades
                     </h3>
 

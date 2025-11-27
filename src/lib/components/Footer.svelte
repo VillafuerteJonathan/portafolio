@@ -12,7 +12,7 @@
     <!-- ICONOS -->
     <div class="flex justify-center gap-6 mb-10">
         <a 
-            href="https://github.com/LizardCs"
+            href="https://github.com/VillafuerteJonathan"
             target="_blank"
             class="footer-icon"
         >
@@ -20,7 +20,7 @@
         </a>
 
         <a 
-            href="https://linkedin.com/in/johan-villafuerte"
+            href="https://www.linkedin.com/in/eduardo-quispe-48a756381"
             target="_blank"
             class="footer-icon"
         >
@@ -28,7 +28,7 @@
         </a>
 
         <a 
-            href="mailto:eduardovillaquis2@gmail.com"
+            href="https://mail.google.com/mail/?view=cm&fs=1&to=eduardovillaquis2@gmail.com&su=Contacto%20desde%20tu%20portafolio&body=Hola%20Eduardo,%0D%0A%0D%0A"
             class="footer-icon"
         >
             <Mail size={26} />
