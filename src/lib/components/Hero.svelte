@@ -174,7 +174,7 @@
                         style="opacity: {imgHover ? 0 : 1};"
                     />
                     <img
-                        src="/img/avatar.png"
+                        src="/img/avatar.jpg"
                         alt="Avatar"
                         class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
                         style="opacity: {imgHover ? 1 : 0};"
