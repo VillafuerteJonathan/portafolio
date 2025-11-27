@@ -167,8 +167,9 @@
                            group-hover:shadow-[0_0_60px_rgba(168,85,247,0.8)]"
                 >
                     <img
-                        src="/img/opc1.png"
+                        src="/img/opc1.webp"
                         alt="Foto"
+                        loading="lazy"
                         class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
                         style="opacity: {imgHover ? 0 : 1};"
                     />
