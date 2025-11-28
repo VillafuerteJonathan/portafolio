@@ -114,7 +114,7 @@
                                            bg-black/40 hover:bg-black/60 border border-white/10
                                            transition w-full text-sm hover:scale-[1.05]"
                                 >
-                                    <img src="/assets/icons/github.svg" class="w-5 opacity-80" />
+                                    <img src="/icons/github.svg" class="w-5 opacity-80" />
                                     Código
                                 </a>
 
