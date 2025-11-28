@@ -1,4 +1,7 @@
-export function fadeInOnScroll(node, { delay = 0, duration = 500, y = 20 } = {}) {
+export function fadeInOnScroll(
+    node,
+    { delay = 0, duration = 600, y = 30 } = {}
+) {
     const observer = new IntersectionObserver(
         ([entry]) => {
             if (entry.isIntersecting) {
@@ -8,7 +11,10 @@ export function fadeInOnScroll(node, { delay = 0, duration = 500, y = 20 } = {})
                 observer.unobserve(node);
             }
         },
-        { threshold: 0.2 }
+        {
+            threshold: 0,         // 🔥 Se activa más rápido en móvil
+            rootMargin: "0px 0px -10% 0px" // 🔥 Se dispara un poquito antes (opcional)
+        }
     );
 
     node.style.opacity = "0";
