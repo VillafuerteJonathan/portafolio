@@ -31,7 +31,7 @@ export function slideFrom(
             }
         },
         {
-            threshold: 0.45, // 🔥 No se activa hasta que 45% sea visible
+            threshold: 0.15, // 🔥 No se activa hasta que 45% sea visible
             rootMargin: "0px 0px -10% 0px" // 🔥 Evita activación anticipada
         }
     );
