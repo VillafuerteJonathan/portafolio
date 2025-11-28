@@ -3,8 +3,16 @@
     export let title = "";
     export let items = [];
 
-    import { createEventDispatcher } from "svelte";
+    import { createEventDispatcher, onMount } from "svelte";
     const dispatch = createEventDispatcher();
+
+    // === PRELOAD IMAGES (instantáneo en móvil) ===
+    onMount(() => {
+        items.forEach(tech => {
+            const img = new Image();
+            img.src = tech.icon;
+        });
+    });
 
     function close() {
         dispatch("close");
@@ -30,7 +38,15 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-h-[60vh] overflow-y-auto pr-2">
             {#each items as tech}
                 <div class="flex items-center gap-3 p-3 bg-white/5 rounded-xl border border-white/10 hover:bg-white/10 transition">
-                    <img src={tech.icon} alt={tech.name} class="w-10 h-10"/>
+                    
+                    <img
+                        src={tech.icon}
+                        alt={tech.name}
+                        class="w-10 h-10 opacity-0 transition-opacity duration-300"
+                        loading="lazy"
+                        on:load={(e) => e.target.classList.add("opacity-100")}
+                    />
+
                     <span class="text-white">{tech.name}</span>
                 </div>
             {/each}
