@@ -1,4 +1,4 @@
-export function fadeInOnScroll(node, { delay = 0, duration = 600, y = 30 } = {}) {
+export function fadeInOnScroll(node, { delay = 0, duration = 500, y = 20 } = {}) {
     const observer = new IntersectionObserver(
         ([entry]) => {
             if (entry.isIntersecting) {
