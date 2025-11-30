@@ -39,7 +39,7 @@ export const PROJECTS = [
     },
     {
         id: 5,
-        title: "Reconocimiento de Enfermedades en hojas de Plantas",
+        title: "Reconocimiento con IA de Enfermedades en hojas de Plantas",
         desc: "Aplicación móvil que identifica enfermedades en hojas de tomate en tiempo real utilizando IA.",
         img: "/assets/images/plantaenferma.jpg",
         tech: ["Android Studio", "Python", "IA", "TensorFlow / Keras", "Jupyter Notebook"],

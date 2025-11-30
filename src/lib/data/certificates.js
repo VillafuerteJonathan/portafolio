@@ -11,6 +11,12 @@ export const CERTIFICATES = [
         institution: "Cisco Networking Academy",
         date: "2025"
     },
+     {
+        title: "Fundamentos JavaScript 1",
+        image: "/assets/certificates/JavaScript.jpg", // Reemplaza con la ruta correcta
+        institution: "Cisco Networking Academy",
+        date: "2025"
+    },
     {
         title: "Título de Conductor Profesional - Licencia Tipo C",
         image: "/assets/certificates/ChoferProfesional.jpg", // Reemplaza con la ruta correcta
