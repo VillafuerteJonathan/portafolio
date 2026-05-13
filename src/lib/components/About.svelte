@@ -3,7 +3,6 @@
     import { TECH } from "$lib/data/tech.js";
     import { onMount, onDestroy } from "svelte";
     import { slideFrom } from "$lib/utils/slideFrom.js";
-
     import {
         UserRound,
         Code2,
