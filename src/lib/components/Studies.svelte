@@ -10,6 +10,16 @@
 
     const education = [
         {
+            title: "Bachillerato en Ciencias",
+            institution: "Colegio 'Mario Cobo Barona'",
+            location: "Ambato, Ecuador",
+            date: "Etapa colegial",
+            desc: "Formacion en una institucion gobernamental del sector ambato",
+            achievements: [
+                "Graduado en bachillerato en ciencas",
+            ]
+        },
+        {
             title: "Ingeniería en Software",
             institution: "Universidad Técnica de Ambato",
             location: "Ambato, Ecuador",
@@ -37,7 +47,22 @@
                 "Uso de Git, Docker y flujos CI/CD para despliegues",
                 "Desarrollo de soluciones personalizadas para clientes variados"
             ]
-        }
+        },
+    {
+    title: "Desarrollador Full Stack",
+    company: "Ambacar / ABYSOFT",
+    location: "Ambato, Ecuador",
+    date: "2022 - Actualidad",
+    desc: "Participación en el desarrollo del sistema ABYSOFT, específicamente en el módulo de comparador de configuraciones, implementando mejoras en la gestión y visualización de datos bajo arquitectura Onion.",
+    tasks: [
+        "Desarrollo de interfaces en Angular para el módulo comparador del sistema ABYSOFT",
+        "Implementación de APIs REST en .NET siguiendo arquitectura Onion",
+        "Consumo e integración de servicios backend para modulo 'comparador de vehiculos'",
+        "Modelado y consultas en base de datos Oracle para soporte del módulo",
+        "Colaboración en diseño de interfaces en Figma para flujos del comparador",
+        "Participación en mantenimiento y mejora del sistema principal empresarial"
+    ]
+}
     ];
 </script>
 
