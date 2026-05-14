@@ -1,50 +1,76 @@
+// ICONOS DESDE LIB ASSETS
+import html from "$lib/assets/icons/html.svg";
+import css from "$lib/assets/icons/css.svg";
+import bootstrap from "$lib/assets/icons/bootstrap.svg";
+import js from "$lib/assets/icons/js.svg";
+import svelte from "$lib/assets/icons/svelte.svg";
+import react from "$lib/assets/icons/react.svg";
+import reactnative from "$lib/assets/icons/reactnative.svg";
+import angular from "$lib/assets/icons/angular.svg";
+
+import node from "$lib/assets/icons/node.svg";
+import express from "$lib/assets/icons/express.svg";
+import nestjs from "$lib/assets/icons/nestjs.svg";
+import nextjs from "$lib/assets/icons/nextjs.svg";
+import php from "$lib/assets/icons/php.svg";
+import java from "$lib/assets/icons/java.svg";
+
+import mysql from "$lib/assets/icons/mysql.svg";
+import postgresql from "$lib/assets/icons/postgresql.svg";
+import sqlserver from "$lib/assets/icons/sqlserver.svg";
+import mongo from "$lib/assets/icons/mongo.svg";
+
+import git from "$lib/assets/icons/git.svg"; 
+import github from "$lib/assets/icons/github.svg";
+import docker from "$lib/assets/icons/docker.svg";
+import postman from "$lib/assets/icons/postman.svg";
+import xampp from "$lib/assets/icons/xampp.svg";
+
+import powerbi from "$lib/assets/icons/powerbi.svg";
+import visualstudio from "$lib/assets/icons/visualstudio.svg";
+import netbeans from "$lib/assets/icons/netbeans.svg";
+import androidstudio from "$lib/assets/icons/androidstudio.svg";
+
 export const TECH = {
-
-    // ================= FRONTEND =================
     frontend: [
-        { name: "HTML5", icon: "/icons/html.svg" },
-        { name: "CSS3", icon: "/icons/css.svg" },
-        { name: "Bootstrap", icon: "/icons/boostrap.svg" },
-        { name: "JavaScript", icon: "/icons/js.svg" },
-        { name: "Svelte", icon: "/icons/svelte.svg" },
-        { name: "React", icon: "/icons/react.svg" },
-        { name: "React Native", icon: "/icons/reactnative.svg" },
-        { name: "Angular", icon: "/icons/angular.svg" }
+        { name: "HTML5", icon: html },
+        { name: "CSS3", icon: css },
+        { name: "Bootstrap", icon: bootstrap },
+        { name: "JavaScript", icon: js },
+        { name: "Svelte", icon: svelte },
+        { name: "React", icon: react },
+        { name: "React Native", icon: reactnative },
+        { name: "Angular", icon: angular }
     ],
 
-    // ================= BACKEND =================
     backend: [
-        { name: "Node.js", icon: "/icons/node.svg" },
-        { name: "Express.js", icon: "/icons/express.svg" },
-        { name: "NestJS", icon: "/icons/nestjs.svg" },
-        { name: "Next.js", icon: "/icons/nextjs.svg" },
-        { name: "PHP", icon: "/icons/php.svg" },
-        { name: "Java", icon: "/icons/java.svg" }
+        { name: "Node.js", icon: node },
+        { name: "Express.js", icon: express },
+        { name: "NestJS", icon: nestjs },
+        { name: "Next.js", icon: nextjs },
+        { name: "PHP", icon: php },
+        { name: "Java", icon: java }
     ],
 
-    // ================= DATABASES =================
     database: [
-        { name: "MySQL", icon: "/icons/mysql.svg" },
-        { name: "PostgreSQL", icon: "/icons/postgresql.svg" },
-        { name: "SQL Server", icon: "/icons/sqlserver.svg" },
-        { name: "MongoDB", icon: "/icons/mongo.svg" }
-        
+        { name: "MySQL", icon: mysql },
+        { name: "PostgreSQL", icon: postgresql },
+        { name: "SQL Server", icon: sqlserver },
+        { name: "MongoDB", icon: mongo }
     ],
 
-    // ================= DEVOPS / TOOLS =================
     devops: [
-        { name: "Git", icon: "/icons/git.svg" },
-        { name: "GitHub", icon: "/icons/github.svg" },
-        { name: "Docker", icon: "/icons/docker.svg" },
-        { name: "Postman", icon: "/icons/postman.svg" },
-        { name: "XAMPP", icon: "/icons/xampp.svg" }
+        { name: "Git", icon: git },
+        { name: "GitHub", icon: github },
+        { name: "Docker", icon: docker },
+        { name: "Postman", icon: postman },
+        { name: "XAMPP", icon: xampp }
     ],
 
-    // ================= SOFTWARE Y ANALÍTICA =================
     tools: [
-        { name: "Power BI", icon: "/icons/powerbi.svg" },
-        { name: "Visual Studio", icon: "/icons/visualstudio.svg" },
-        { name: "NetBeans", icon: "/icons/netbeans.svg" },
-        { name: "Android Studio", icon: "/icons/androidstudio.svg" }
+        { name: "Power BI", icon: powerbi },
+        { name: "Visual Studio", icon: visualstudio },
+        { name: "NetBeans", icon: netbeans },
+        { name: "Android Studio", icon: androidstudio }
     ]
 };

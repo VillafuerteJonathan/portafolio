@@ -1,36 +1,42 @@
 <script>
     export let open = false;
     export let title = "";
-    export let items = []; // { name, icon }
+    export let items = [];
 
     import { createEventDispatcher, onMount, onDestroy } from "svelte";
     const dispatch = createEventDispatcher();
 
     function close() {
-        dispatch("close"); // El padre debe cambiar "open"
+        dispatch("close");
     }
 
-    // Cerrar con ESC
     function handleKey(e) {
         if (e.key === "Escape") close();
     }
 
-    onMount(() => window.addEventListener("keydown", handleKey));
-    onDestroy(() => window.removeEventListener("keydown", handleKey));
+    onMount(() => {
+        if (typeof window !== "undefined") {
+            window.addEventListener("keydown", handleKey);
+        }
+    });
+
+    onDestroy(() => {
+        if (typeof window !== "undefined") {
+            window.removeEventListener("keydown", handleKey);
+        }
+    });
 </script>
 
 {#if open}
 <div 
     class="fixed inset-0 bg-black/60 backdrop-blur-md flex justify-center items-center z-[100] animate-fade"
-    tabindex="0"
     on:click={close}
     role="dialog"
     aria-modal="true"
     aria-label={title}
 >
     <div 
-        class="bg-[#0f1424] rounded-2xl p-10 w-[90%] max-w-2xl shadow-2xl border border-white/10
-               animate-zoom"
+        class="bg-[#0f1424] rounded-2xl p-10 w-[90%] max-w-2xl shadow-2xl border border-white/10 animate-zoom"
         on:click|stopPropagation
     >
         <h2 class="text-3xl font-bold text-purple-300 mb-6 text-center">
@@ -38,18 +44,20 @@
         </h2>
 
         <div class="grid grid-cols-3 md:grid-cols-4 gap-6">
-            {#each items as item}
+            {#each items ?? [] as item}
                 <div 
-                    class="flex flex-col items-center text-center" 
-                    role="group" 
-                    aria-label={item.name}
+                    class="flex flex-col items-center text-center"
+                    role="group"
+                    aria-label={item?.name}
                 >
                     <img 
-                        src={item.icon} 
-                        alt={item.name} 
+                        src={item?.icon}
+                        alt={item?.name}
                         class="w-12 h-12 mb-2"
                     />
-                    <span class="text-gray-300 text-sm">{item.name}</span>
+                    <span class="text-gray-300 text-sm">
+                        {item?.name}
+                    </span>
                 </div>
             {/each}
         </div>
