@@ -53,7 +53,7 @@
     company: "Ambacar / ABYSOFT",
     location: "Ambato, Ecuador",
     date: "2022 - Actualidad",
-    desc: "Participación en el desarrollo del sistema ABYSOFT, específicamente en el módulo de comparador de configuraciones, implementando mejoras en la gestión y visualización de datos bajo arquitectura Onion.",
+    desc: "Participación en el desarrollo del sistema ABYSOFT, específicamente en el módulo de 'comparador de vehiculos', implementando mejoras en la gestión y visualización de datos bajo arquitectura Onion.",
     tasks: [
         "Desarrollo de interfaces en Angular para el módulo comparador del sistema ABYSOFT",
         "Implementación de APIs REST en .NET siguiendo arquitectura Onion",
