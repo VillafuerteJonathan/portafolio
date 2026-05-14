@@ -50,12 +50,12 @@
         },
     {
     title: "Desarrollador Full Stack",
-    company: "Ambacar / ABYSOFT",
+    company: "Ambacar / AMBYSOFT",
     location: "Ambato, Ecuador",
     date: "2022 - Actualidad",
-    desc: "Participación en el desarrollo del sistema ABYSOFT, específicamente en el módulo de 'comparador de vehiculos', implementando mejoras en la gestión y visualización de datos bajo arquitectura Onion.",
+    desc: "Participación en el desarrollo del sistema AMBYSOFT, específicamente en el módulo de 'comparador de vehiculos', implementando mejoras en la gestión y visualización de datos bajo arquitectura Onion.",
     tasks: [
-        "Desarrollo de interfaces en Angular para el módulo comparador del sistema ABYSOFT",
+        "Desarrollo de interfaces en Angular para el módulo comparador del sistema AMBYSOFT",
         "Implementación de APIs REST en .NET siguiendo arquitectura Onion",
         "Consumo e integración de servicios backend para modulo 'comparador de vehiculos'",
         "Modelado y consultas en base de datos Oracle para soporte del módulo",
