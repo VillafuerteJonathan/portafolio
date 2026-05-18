@@ -4,7 +4,7 @@
 	// ✔️ IMÁGENES DESDE lib/assets (CORRECTO)
 	import opc1 from '$lib/assets/img/opc1.webp';
 	import avatar from '$lib/assets/img/avatar.jpg';
-	import hv from '$lib/pdf/micv.pdf';
+	import hv from '$lib/pdf/CV-VILLAFUERTE-JONATHAN.pdf';
 
 	let mouseX = 0;
 	let mouseY = 0;
