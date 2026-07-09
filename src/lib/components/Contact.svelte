@@ -35,10 +35,10 @@
 
         {
             label: "LinkedIn",
-            value: "eduardo-quispe",
+            value: "Jonathan Villafuerte",
             icon: Linkedin,
             color: "from-blue-500 to-blue-700",
-            link: "https://www.linkedin.com/in/eduardo-quispe-48a756381",
+            link: "https://www.linkedin.com/in/jonathan-villafuerte-48a756381/",
             clickable: true
         }
     ];
