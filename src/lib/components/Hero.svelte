@@ -94,7 +94,7 @@
 				</a>
 
 				<a
-					href="https://www.linkedin.com/in/jonathan-villafuerte-48a756381/"
+					href="https://www.linkedin.com/in/jonathan-villafuerte-48a	756381/"
 					target="_blank"
 					class="p-2 rounded-xl bg-white/5 hover:bg-purple-600/30 transition-all border border-white/10"
 				>
