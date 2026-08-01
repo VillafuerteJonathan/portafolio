@@ -5,11 +5,18 @@ import JavaScript from '../certificates/JavaScript.jpg';
 import EncuentroPedagogico from '../certificates/EncuentroPedagogico.jpg';
 import ChoferProfesional from '../certificates/ChoferProfesional.jpg';
 import PracticasPillaro from '../certificates/PracticasPillaro.jpg';
+import  CreacionDePaginasWeb  from '../certificates/CreacionDePaginasWeb.jpg';
 
 export const CERTIFICATES = [
   {
     title: "Aplicaciones del entorno POWER BI",
     image: EntornoPowerBI,
+    institution: "SECAP",
+    date: "2026"
+  },
+   {
+    title: "CREACIÓN, DISEÑO Y DESARROLLO DESITIOS WEB",
+    image: CreacionDePaginasWeb,
     institution: "SECAP",
     date: "2026"
   },
