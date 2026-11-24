@@ -24,7 +24,7 @@
         </a>
 
         <a 
-            href="https://www.linkedin.com/in/eduardo-quispe-48a756381"
+            href="https://www.linkedin.com/in/jonathan-villafuerte-48a756381/"
             target="_blank"
             class="footer-icon"
         >
