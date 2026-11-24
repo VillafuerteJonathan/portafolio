@@ -3,14 +3,7 @@
 	import { GraduationCap, School, BriefcaseBusiness, MapPin, CalendarRange } from 'lucide-svelte';
 
 	const education = [
-		{
-			title: 'Bachillerato en Ciencias',
-			institution: "Colegio 'Mario Cobo Barona'",
-			location: 'Ambato, Ecuador',
-			date: 'Etapa colegial',
-			desc: 'Formacion en una institucion gobernamental del sector ambato',
-			achievements: ['Graduado en bachillerato en ciencas']
-		},
+	
 		{
 			title: 'Ingeniería en Software',
 			institution: 'Universidad Técnica de Ambato',
@@ -35,7 +28,15 @@
 				'Formación en normativa y seguridad vial.',
 				'Conocimientos de conducción responsable y preventiva.'
 			]
-		}
+		},
+        	{
+			title: 'Bachillerato en Ciencias',
+			institution: "Colegio 'Mario Cobo Barona'",
+			location: 'Ambato, Ecuador',
+			date: 'Etapa colegial',
+			desc: 'Formacion en una institucion gobernamental del sector ambato',
+			achievements: ['Graduado en bachillerato en ciencas']
+		}   
 	];
 
 	const experience = [
@@ -73,7 +74,7 @@
 			title: 'Asistente de Bases de Datos',
 			company: 'GAD AMBATO',
 			location: 'Ambato, Ecuador',
-			date: '2025',
+			date: 'Agosto 2025 - Octubre 2025',
 			desc: 'Soporte en la administración de bases de datos catastrales, validación de información SIG y automatización de consultas.',
 			tasks: [
 				'Administración y validación de información en bases de datos catastrales.',
@@ -87,7 +88,7 @@
 			title: 'Desarrollador Backend Junior',
 			company: 'GAD PÍLLARO',
 			location: 'Píllaro, Ecuador',
-			date: '2025',
+			date: 'Marzo 2025 - Julio 2025',
 			desc: 'Desarrollo backend de un sistema de gestión de cementerios, enfocado en la administración de información y servicios institucionales.',
 			tasks: [
 				'Análisis y modelado de datos para el sistema.',
